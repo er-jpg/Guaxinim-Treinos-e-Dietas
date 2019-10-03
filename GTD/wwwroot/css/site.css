@@ -63,6 +63,11 @@ h1, h2, h3, h4, h5, h6 {
     background-repeat: no-repeat;
 }
 
+.comentario {
+    background-image: url("../img/svg/comment.svg");
+    background-repeat: no-repeat;
+}
+
 /* HEADER AND NAV BAR */
 
 header {
@@ -318,6 +323,15 @@ section {
         min-height: 15vw;
         width: 18vw;
     }
+
+.wide {
+    width: 48vw !important;
+    margin: 0 auto;
+}
+
+.huge {
+    width: 100% !important;
+}
 
 .bot {
     cursor: pointer;

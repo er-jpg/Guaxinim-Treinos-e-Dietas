@@ -11,7 +11,7 @@
 
 
 
-    <form asp-action="Create" class="frm">
+    <form asp-action="Create" class="frm wide">
         <div asp-validation-summary="ModelOnly" class="erro"></div>
 
         <div class="linha">
@@ -19,14 +19,14 @@
             <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>
         </div>
 
-        <input asp-for="DietaNome" class="form-control" placeholder="Nome da Dieta" />
+        <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
         <span asp-validation-for="DietaNome" class="text-danger"></span>
 
-        <input asp-for="Duracao" class="form-control" placeholder="Duração" />
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" />
         <span asp-validation-for="Duracao" class="text-danger"></span>
 
         <label asp-for="DataDieta"></label>
-        <input asp-for="DataDieta" class="form-control" placeholder="Data de Início" />
+        <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
         <span asp-validation-for="DataDieta" class="text-danger"></span>
 
         <label class="form-check-label">
@@ -34,12 +34,14 @@
         </label>
 
         <p>Escreva a sua dieta em markdown.</p>
-        <textarea asp-for="DescDieta" class="form-control"></textarea>
+        <textarea asp-for="DescDieta" class="form-control huge"></textarea>
         <span asp-validation-for="DescDieta" class="text-danger"></span>
+
+        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
 
         <div class="linha">
             <input type="submit" value="Salvar" class="bot" />
-            <button class="bot bot-back" asp-action="Index">Voltar</button>
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>
     </form>
 
