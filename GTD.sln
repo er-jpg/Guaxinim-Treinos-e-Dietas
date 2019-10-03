@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GTD", "GTD\GTD.csproj", "{564F27BE-1288-4817-AFE1-5B7EA29F32DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{564F27BE-1288-4817-AFE1-5B7EA29F32DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564F27BE-1288-4817-AFE1-5B7EA29F32DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564F27BE-1288-4817-AFE1-5B7EA29F32DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564F27BE-1288-4817-AFE1-5B7EA29F32DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {648402CD-6C26-4B05-B89E-0610D859A4F2}
+	EndGlobalSection
+EndGlobal

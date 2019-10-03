@@ -1,0 +1,61 @@
+﻿@model IEnumerable<GTD.Models.Treino>
+
+@{
+    ViewData["Title"] = "Lista de Treinos";
+}
+
+<div class="main">
+    <div class="indicador">
+        <h2>Todos os Treinos</h2>
+        <a asp-action="Create" class="criar-novo">
+            <span class="icone criar"></span>
+        </a>
+    </div>
+
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TreinoNome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duracao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataTreino)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Completo)
+                </th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            @foreach (var item in Model)
+            {
+                <tr data-href="@Url.Action("Details", "Treino", new { id = item.TreinoID })">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TreinoNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescTreino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duracao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataTreino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Completo)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TreinoID"><span class="icone editar"></span></a>
+                        @*<a asp-action="Details" asp-route-id="@item.PlanoID">Details</a> |*@
+                        <a asp-action="Delete" asp-route-id="@item.TreinoID"><span class="icone deletar"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

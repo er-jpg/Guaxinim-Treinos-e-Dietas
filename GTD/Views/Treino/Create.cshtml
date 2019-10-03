@@ -1,0 +1,57 @@
+﻿@model GTD.Models.Treino
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Treino</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TreinoNome" class="control-label"></label>
+                <input asp-for="TreinoNome" class="form-control" />
+                <span asp-validation-for="TreinoNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescTreino" class="control-label"></label>
+                <textarea asp-for="DescTreino" class="form-control"></textarea>
+                <span asp-validation-for="DescTreino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duracao" class="control-label"></label>
+                <input asp-for="Duracao" class="form-control" />
+                <span asp-validation-for="Duracao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataTreino" class="control-label"></label>
+                <input asp-for="DataTreino" class="form-control" />
+                <span asp-validation-for="DataTreino" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SemanaID" class="control-label"></label>
+                <select asp-for="SemanaID" class ="form-control" asp-items="ViewBag.SemanaID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,35 @@
+﻿@model GTD.Models.Infra.Login
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<section id="login">
+    <div class="left" id="bg-login">
+    </div>
+    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="frm" autocomplete="off">
+        <h4 class="h4-a">GTD</h4>
+        <p>Bem vindo de volta. Acesse a sua conta.</p>
+        <div asp-validation-summary="All" class="erro"></div>
+
+        <input asp-for="Email" class="form-control" placeholder="Email" />
+
+        <input asp-for="Senha" class="form-control" placeholder="Senha" />
+
+        <div class="check">
+            <label asp-for="Lembrar">
+                <input type="checkbox" asp-for="Lembrar" />
+                @Html.DisplayNameFor(m => m.Lembrar)
+            </label>
+        </div>
+        <button type="submit" class="bot">
+            Acessar
+        </button>
+        <a class="small" asp-controller="Infra" asp-action="Register">Registre-se</a>
+    </form>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

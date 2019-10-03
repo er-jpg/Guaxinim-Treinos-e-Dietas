@@ -1,0 +1,30 @@
+﻿@model GTD.Models.Infra.Cadastro
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section id="login">
+    <div class="left" id="bg-register"></div>
+    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="frm">
+        <h4 class="h4-a">GTD</h4>
+        <p>Cadastre-se agora para usar o sistema.</p>
+        <div asp-validation-summary="All" class="erro"></div>
+        <input asp-for="User" class="form-control" placeholder="Usuário" />
+
+        <input asp-for="Email" class="form-control" placeholder="Email" />
+        <p>A senha deve conter no mínimo 6 caracteres.</p>
+        <input asp-for="Password" class="form-control" placeholder="Senha" />
+
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirmar Senha" />
+
+        <button type="submit" class="bot">
+            Registrar
+        </button>
+        <a class="small" asp-controller="Infra" asp-action="Login">Entrar</a>
+    </form>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

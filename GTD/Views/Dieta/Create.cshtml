@@ -1,0 +1,52 @@
+﻿@model GTD.Models.Dieta
+
+@{
+    ViewData["Title"] = "Criar Nova Dieta";
+}
+
+<div class="main">
+    <div class="indicador">
+        <h2>Criando nova dieta</h2>
+    </div>
+
+
+
+    <form asp-action="Create" class="frm">
+        <div asp-validation-summary="ModelOnly" class="erro"></div>
+
+        <div class="linha">
+            <label asp-for="SemanaID"></label>
+            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>
+        </div>
+
+        <input asp-for="DietaNome" class="form-control" placeholder="Nome da Dieta" />
+        <span asp-validation-for="DietaNome" class="text-danger"></span>
+
+        <input asp-for="Duracao" class="form-control" placeholder="Duração" />
+        <span asp-validation-for="Duracao" class="text-danger"></span>
+
+        <label asp-for="DataDieta"></label>
+        <input asp-for="DataDieta" class="form-control" placeholder="Data de Início" />
+        <span asp-validation-for="DataDieta" class="text-danger"></span>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <p>Escreva a sua dieta em markdown.</p>
+        <textarea asp-for="DescDieta" class="form-control"></textarea>
+        <span asp-validation-for="DescDieta" class="text-danger"></span>
+
+        <div class="linha">
+            <input type="submit" value="Salvar" class="bot" />
+            <button class="bot bot-back" asp-action="Index">Voltar</button>
+        </div>
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
