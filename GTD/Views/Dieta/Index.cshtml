@@ -12,6 +12,19 @@
         </a>
     </div>
 
+    @* modal insana meu deus não sei como isso funciona *@
+    <div id="deleteModal" class="modal">
+        <form class="frm" id="formModal" method="post">
+            <h3>Tem certeza que deseja deletar a Dieta</h3>
+            <input type="hidden" id="hiddenid" />
+            <input type="text" id="hidden-name" disabled />
+            <div class="linha">
+                <input type="submit" value="Delete" class="bot bot-alert" />                
+                <a href="#" rel="modal:close" class="bot bot-back">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
     <table class="table-fill">
         <thead>
             <tr>
@@ -33,25 +46,29 @@
         <tbody class="table-hover">
             @foreach (var item in Model)
             {
-            <tr data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
-                <td>
-                    @Html.DisplayFor(modelItem => item.DietaNome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duracao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataDieta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Completo)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.DietaID"><span class="icone editar"></span></a>
-                    @*<a asp-action="Details" asp-route-id="@item.PlanoID">Details</a> |*@
-                    <a asp-action="Delete" asp-route-id="@item.DietaID"><span class="icone deletar"></span></a>
-                </td>
-            </tr>
+
+                <tr>
+                    <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
+                        @Html.DisplayFor(modelItem => item.DietaNome)
+                    </td>
+                    <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
+                        @Html.DisplayFor(modelItem => item.Duracao)
+                    </td>
+                    <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
+                        @Html.DisplayFor(modelItem => item.DataDieta)
+                    </td>
+                    <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
+                        @Html.DisplayFor(modelItem => item.Completo)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.DietaID"><span class="icone editar"></span></a>
+                        @*<a asp-action="Details" asp-route-id="@item.PlanoID">Details</a> |*@
+                        <a href="#deleteModal" rel="modal:open" id="abre-mol"
+                           data-route="/Dieta/Delete/@item.DietaID" data-id=@item.DietaID data-name="@item.DietaNome">
+                            <span class="icone deletar"></span>
+                        </a>
+                    </td>
+                </tr>
             }
 
         </tbody>

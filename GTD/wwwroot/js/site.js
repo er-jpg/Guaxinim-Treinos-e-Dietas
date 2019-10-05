@@ -13,3 +13,13 @@ jQuery(document).ready(function ($) {
 function mudaCor(x, _this) {
     x.style.backgroundColor = _this.checked ? '#55B97F' : '#E16E70';
 }
+
+$(document).on("click", "#abre-mol", function () {
+     var hiddenId = $(this).data('id'),
+         hiddenAction = $(this).data('route'),
+         hiddenName = $(this).data('name');
+     $("#hiddenid").val( hiddenId );
+     $("#hidden-name").val( hiddenName );
+    document.getElementById('formModal').action = hiddenAction;
+
+});

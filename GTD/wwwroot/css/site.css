@@ -338,14 +338,14 @@ section {
     color: var(--braquinho);
     font-size: 16px;
     text-transform: uppercase;
-    width: 100px;
     border: 0;
-    padding: 10px 0;
+    padding: 10px 10px;
     margin-top: 10px;
     margin-left: -5px;
     border-radius: 5px;
     background-color: var(--confirmaBtn);
     transition: background-color 300ms;
+    text-decoration: none;
 }
 
     .bot:hover {
@@ -354,6 +354,14 @@ section {
 
 .bot-back {
     background-color: #909090;
+}
+
+.bot-sec {
+    background-color: red;
+}
+
+.bot-alert {
+    background-color: var(--cancelaBtn);
 }
 
 .left {
@@ -408,8 +416,17 @@ section {
 /* MODAL OVERRIDE */
 
 .modal {
-    margin: 0 !important;
-    padding: 0 !important;
+    background-color: var(--braquinho) !important;
+}
+
+.modal > .frm {
+    margin: 0 auto;
+    width: 35vw;
+}
+
+.modal > .frm > input {
+    width: 30vw;
+    text-align: center;
 }
 
 
