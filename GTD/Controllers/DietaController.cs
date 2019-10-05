@@ -123,23 +123,23 @@ namespace GTD.Controllers
         }
 
         // GET: Dieta/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var dieta = await _context.Dieta
-                .Include(d => d.Semana)
-                .FirstOrDefaultAsync(m => m.DietaID == id);
-            if (dieta == null)
-            {
-                return NotFound();
-            }
+        //    var dieta = await _context.Dieta
+        //        .Include(d => d.Semana)
+        //        .FirstOrDefaultAsync(m => m.DietaID == id);
+        //    if (dieta == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(dieta);
-        }
+        //    return View(dieta);
+        //}
 
         // POST: Dieta/Delete/5
         [HttpPost, ActionName("Delete")]

@@ -10,10 +10,12 @@ jQuery(document).ready(function ($) {
     });
 });
 
+// muda a cor do fundo do diário
 function mudaCor(x, _this) {
     x.style.backgroundColor = _this.checked ? '#55B97F' : '#E16E70';
 }
 
+// modal mágica pra deletar direto da lista
 $(document).on("click", "#abre-mol", function () {
      var hiddenId = $(this).data('id'),
          hiddenAction = $(this).data('route'),
@@ -21,5 +23,4 @@ $(document).on("click", "#abre-mol", function () {
      $("#hiddenid").val( hiddenId );
      $("#hidden-name").val( hiddenName );
     document.getElementById('formModal').action = hiddenAction;
-
 });

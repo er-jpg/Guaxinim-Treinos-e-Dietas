@@ -1,58 +1,54 @@
 ﻿@model GTD.Models.Dieta
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editando Dieta";
 }
 
-<h1>Edit</h1>
-
-<h4>Dieta</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="DietaID" />
-            <div class="form-group">
-                <label asp-for="DietaNome" class="control-label"></label>
-                <input asp-for="DietaNome" class="form-control" />
-                <span asp-validation-for="DietaNome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescDieta" class="control-label"></label>
-                <textarea asp-for="DescDieta" class="form-control"></textarea>
-                <span asp-validation-for="DescDieta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Duracao" class="control-label"></label>
-                <input asp-for="Duracao" class="form-control" />
-                <span asp-validation-for="Duracao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataDieta" class="control-label"></label>
-                <input asp-for="DataDieta" class="form-control" />
-                <span asp-validation-for="DataDieta" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="SemanaID" class="control-label"></label>
-                <select asp-for="SemanaID" class="form-control" asp-items="ViewBag.SemanaID"></select>
-                <span asp-validation-for="SemanaID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="main">
+    <div class="indicador">
+        <h2>Editando dieta: @Model.DietaNome</h2>
     </div>
+
+    <form asp-action="Edit" class="frm wide">
+        <div asp-validation-summary="ModelOnly" class="erro"></div>
+        <input type="hidden" asp-for="DietaID" />
+
+        <div class="linha">
+            <label asp-for="SemanaID"></label>
+            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>
+        </div>
+
+        <label asp-for="DietaNome"></label>
+        <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
+        <span asp-validation-for="DietaNome" class="text-danger"></span>
+
+        <label asp-for="DietaNome"></label>
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" />
+        <span asp-validation-for="Duracao" class="text-danger"></span>
+
+        <label asp-for="DataDieta"></label>
+        <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
+        <span asp-validation-for="DataDieta" class="text-danger"></span>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <p>Escreva a sua dieta em markdown.</p>
+        <textarea asp-for="DescDieta" class="form-control huge"></textarea>
+        <span asp-validation-for="DescDieta" class="text-danger"></span>
+
+        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
+
+        <div class="linha">
+            <input type="submit" value="Salvar" class="bot" />
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        </div>
+    </form>
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -357,7 +357,7 @@ section {
 }
 
 .bot-sec {
-    background-color: red;
+    background-color: #6F86E8;
 }
 
 .bot-alert {
@@ -421,7 +421,7 @@ section {
 
 .modal > .frm {
     margin: 0 auto;
-    width: 35vw;
+    width: 28vw;
 }
 
 .modal > .frm > input {

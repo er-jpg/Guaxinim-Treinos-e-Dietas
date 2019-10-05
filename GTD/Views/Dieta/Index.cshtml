@@ -46,7 +46,6 @@
         <tbody class="table-hover">
             @foreach (var item in Model)
             {
-
                 <tr>
                     <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
                         @Html.DisplayFor(modelItem => item.DietaNome)

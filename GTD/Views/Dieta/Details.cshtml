@@ -6,48 +6,37 @@
 
 <div class="main">
     <div class="indicador">
-        <h2>@Html.DisplayFor(model => model.DietaNome)</h2>
+        <h2>Dieta: @Html.DisplayFor(model => model.DietaNome)</h2>
     </div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DietaNome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DietaNome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DescDieta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DescDieta)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Duracao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Duracao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataDieta)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataDieta)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Completo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Completo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Semana)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Semana.SemanaID)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.DietaID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <form class="frm wide">
+        <div class="linha">
+            <label asp-for="SemanaID"></label>
+            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>
+        </div>
+
+        <label asp-for="DietaNome"></label>
+        <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" disabled />
+
+        <label asp-for="Duracao"></label>
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" disabled />
+
+        <label asp-for="DataDieta"></label>
+        <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" disabled />
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" disabled /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <p>Escreva a sua dieta em markdown.</p>
+        <textarea asp-for="DescDieta" class="form-control huge" disabled></textarea>
+        <span asp-validation-for="DescDieta" class="text-danger"></span>
+
+        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
+
+        <div class="linha">
+            <a asp-action="Edit" asp-route-id="@Model.DietaID" class="bot bot-sec">Editar</a>
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        </div>
+    </form>
 </div>
