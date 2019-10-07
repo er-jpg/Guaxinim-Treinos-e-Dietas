@@ -31,21 +31,21 @@
             <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
         </label>
 
-        <p>Escreva a sua dieta em markdown.</p>
-        <textarea asp-for="DescDieta" class="form-control huge"></textarea>
+        <p>Escreva a sua dieta seguindo o formato abaixo</p>
+        <textarea asp-for="DescDieta" class="form-control huge" id="textareaMd"></textarea>
         <span asp-validation-for="DescDieta" class="text-danger"></span>
 
-        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
+        <p><span class="icone comentario"></span>Ajuda com o formato.</p>
 
         <div class="linha">
-            <input type="submit" value="Salvar" class="bot" />
+            <input type="submit" value="Salvar" class="bot" id="btnSave" />
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>
     </form>
 
 </div>
 
-
+<script src="~/js/textValidator.js" asp-append-version="true"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

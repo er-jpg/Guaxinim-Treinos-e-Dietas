@@ -14,10 +14,10 @@
     margin: 0;
     font-weight: 300;
     text-rendering: optimizeLegibility;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
     background-color: #e6e6e6;
 }
 
@@ -351,6 +351,11 @@ section {
     .bot:hover {
         background-color: var(--verdeEsc);
     }
+
+.bot:disabled {
+    background-color: gray;
+    cursor: default;
+} 
 
 .bot-back {
     background-color: #909090;

@@ -1,13 +1,23 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
+﻿// Aqui é onde vive a gambiarra, nem sei o que tá mais escrito aqui.
 // Write your JavaScript code.
 
-// pra fazer as tabela fica monstrona do pantano
 jQuery(document).ready(function ($) {
+    // pra fazer as tabela fica monstrona do pantano
     $('*[data-href]').on('click', function () {
         window.location = $(this).data("href");
     });
+    // pra encher linguiça dos create com markdown eh aqui
+    var textoSemana = "Domingo\n...\n\nSegunda-feira\n...\n\nTerça-feira\n...\n\nQuarta-feira\n...\n\nQuinta-feira\n...\n\nSexta-feira\n...\n\nSábado\n..."
+    $('#textareaMd').val(textoSemana);
+
+    // magia da text area pra ela ir crescendo de tamanho conforme vão escrevendo
+    $('#textareaMd').each(function () {
+        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    }).on('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
 });
 
 // muda a cor do fundo do diário
@@ -23,4 +33,15 @@ $(document).on("click", "#abre-mol", function () {
      $("#hiddenid").val( hiddenId );
      $("#hidden-name").val( hiddenName );
     document.getElementById('formModal').action = hiddenAction;
+});
+
+// agora que é vou sofrer
+// TODO: colocar a sombra vermelha ou sem sombra!
+$(document).on("blur", "#textareaMd", function() {
+    if (validateDays($('#textareaMd').val())) {
+        $('#btnSave').removeAttr("disabled");	
+    }
+    else {
+        $('#btnSave').attr("disabled", true);        
+    }
 });
