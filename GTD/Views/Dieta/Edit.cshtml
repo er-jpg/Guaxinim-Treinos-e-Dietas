@@ -22,9 +22,9 @@
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
         <span asp-validation-for="DietaNome" class="text-danger"></span>
 
-        <label asp-for="DietaNome"></label>
+        @*<label asp-for="DietaNome"></label>
         <input asp-for="Duracao" class="form-control huge" placeholder="Duração" />
-        <span asp-validation-for="Duracao" class="text-danger"></span>
+        <span asp-validation-for="Duracao" class="text-danger"></span>*@
 
         <label asp-for="DataDieta"></label>
         <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
@@ -35,20 +35,20 @@
         </label>
 
         <p>Escreva a sua dieta em markdown.</p>
-        <textarea asp-for="DescDieta" class="form-control huge"></textarea>
+        <textarea asp-for="DescDieta" class="form-control huge" id="textareaMd"></textarea>
         <span asp-validation-for="DescDieta" class="text-danger"></span>
 
         <p><span class="icone comentario"></span>Ajuda com markdown.</p>
 
         <div class="linha">
-            <input type="submit" value="Salvar" class="bot" />
+            <input type="submit" value="Salvar" class="bot" id="btnSave" />
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>
     </form>
 
 </div>
 
-
+<script src="~/js/textValidator.js" asp-append-version="true"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -156,5 +156,18 @@ namespace GTD.Controllers
         {
             return _context.Dieta.Any(e => e.DietaID == id);
         }
+
+        // função pra adicionar semana
+        public void AddOneWeek()
+        {
+            var umaSemana = new Semana()
+            {
+                SemanaNum = _context.Semana.Max(s => s.SemanaNum),
+                DataInicio = DateTime.Now,
+                DataFim = DateTime.Now.AddDays(7)
+            };
+            _context.Semana.Add(umaSemana);
+            _context.SaveChanges();
+        }
     }
 }

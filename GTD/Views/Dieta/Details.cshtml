@@ -18,8 +18,8 @@
         <label asp-for="DietaNome"></label>
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" disabled />
 
-        <label asp-for="Duracao"></label>
-        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" disabled />
+        @*<label asp-for="Duracao"></label>
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" disabled />*@
 
         <label asp-for="DataDieta"></label>
         <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" disabled />
@@ -29,7 +29,7 @@
         </label>
 
         <p>Escreva a sua dieta em markdown.</p>
-        <textarea asp-for="DescDieta" class="form-control huge" disabled></textarea>
+        <textarea asp-for="DescDieta" class="form-control huge" id="textareaMd" disabled></textarea>
         <span asp-validation-for="DescDieta" class="text-danger"></span>
 
         <p><span class="icone comentario"></span>Ajuda com markdown.</p>
@@ -40,3 +40,5 @@
         </div>
     </form>
 </div>
+
+<script src="~/js/textValidator.js" asp-append-version="true"></script>

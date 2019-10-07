@@ -21,6 +21,8 @@ namespace GTD.Data
 
         public DbSet<GTD.Models.Dieta> Dieta { get; set; }
 
+        public DbSet<GTD.Models.Semana> Semana { get; set; }
+
         // n:m mas não tem no nosso sistema
         //protected override void OnModelCreating(ModelBuilder builder)
         //{

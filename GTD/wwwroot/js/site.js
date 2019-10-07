@@ -7,8 +7,8 @@ jQuery(document).ready(function ($) {
         window.location = $(this).data("href");
     });
     // pra encher linguiça dos create com markdown eh aqui
-    var textoSemana = "Domingo\n...\n\nSegunda-feira\n...\n\nTerça-feira\n...\n\nQuarta-feira\n...\n\nQuinta-feira\n...\n\nSexta-feira\n...\n\nSábado\n..."
-    $('#textareaMd').val(textoSemana);
+    var textoSemana = "Domingo\n...\n\nSegunda-feira\n...\n\nTerça-feira\n...\n\nQuarta-feira\n...\n\nQuinta-feira\n...\n\nSexta-feira\n...\n\nSábado\n...";
+    $('#textareaMd.create').val(textoSemana);
 
     // magia da text area pra ela ir crescendo de tamanho conforme vão escrevendo
     $('#textareaMd').each(function () {
@@ -35,13 +35,26 @@ $(document).on("click", "#abre-mol", function () {
     document.getElementById('formModal').action = hiddenAction;
 });
 
-// agora que é vou sofrer
-// TODO: colocar a sombra vermelha ou sem sombra!
+// box shadow que funciona nos navegador
 $(document).on("blur", "#textareaMd", function() {
     if (validateDays($('#textareaMd').val())) {
-        $('#btnSave').removeAttr("disabled");	
+        $('#btnSave').removeAttr("disabled");
+        // gambiarra bonita, olha que linda pqp porque navegadro não funciona bem
+        $('#textareaMd').css('box-shadow', '0px 0px 0px 0px white');
     }
     else {
+        $('#textareaMd').css('box-shadow', '0px 0px 25px 0px rgba(225,110,112,1)');
         $('#btnSave').attr("disabled", true);        
     }
+});
+
+// criar nova semana
+$("#createWeek").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: $(this).attr("href"), // comma here instead of semicolon   
+        success: function () {
+            alert("Adicionado");  // or any other indication if you want to show
+        }
+    });
 });

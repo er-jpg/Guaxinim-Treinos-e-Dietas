@@ -19,9 +19,9 @@ namespace GTD.Models
         [Display(Name = "Dieta")]
         public string DescDieta { get; set; }
 
-        [Required]
-        [Display(Name = "Duração")]
-        public int Duracao { get; set; }
+        //[Required]
+        //[Display(Name = "Duração")]
+        //public int Duracao { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

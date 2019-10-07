@@ -25,9 +25,11 @@ namespace GTD.Models
         [Display(Name = "Data de Fim")]
         public DateTime? DataFim { get; set; }
 
-        [Required]
-        [Display(Name = "Duração")]
-        public int Duracao { get; set; }
+        //[Required]
+        //[Display(Name = "Duração")]
+        //public int Duracao { get; set; }
+
+        public string teste { get; set; }
 
         // FK
         public virtual ICollection<Plano> Plano { get; set; }

@@ -426,12 +426,14 @@ section {
 
 .modal > .frm {
     margin: 0 auto;
-    width: 28vw;
+    width: 20vw;
 }
 
 .modal > .frm > input {
-    width: 30vw;
+    width: 18vw;
     text-align: center;
+    margin: 0 auto;
+    margin-top: 1em;
 }
 
 

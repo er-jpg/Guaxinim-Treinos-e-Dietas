@@ -19,7 +19,7 @@
             <input type="hidden" id="hiddenid" />
             <input type="text" id="hidden-name" disabled />
             <div class="linha">
-                <input type="submit" value="Delete" class="bot bot-alert" />                
+                <input type="submit" value="Deletar" class="bot bot-alert" />                
                 <a href="#" rel="modal:close" class="bot bot-back">Cancelar</a>
             </div>
         </form>
@@ -31,9 +31,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DietaNome)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.Duracao)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.DataDieta)
                 </th>
@@ -50,9 +50,9 @@
                     <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
                         @Html.DisplayFor(modelItem => item.DietaNome)
                     </td>
-                    <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
+                    @*<td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
                         @Html.DisplayFor(modelItem => item.Duracao)
-                    </td>
+                    </td>*@
                     <td data-href="@Url.Action("Details", "Dieta", new { id = item.DietaID })">
                         @Html.DisplayFor(modelItem => item.DataDieta)
                     </td>
