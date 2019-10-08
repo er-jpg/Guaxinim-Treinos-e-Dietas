@@ -167,8 +167,7 @@ namespace GTD.Controllers
                 DataFim = DateTime.Now.AddDays(7)
             };
             _context.Semana.Add(umaSemana);
-            _context.SaveChanges();
-            
+            _context.SaveChanges();            
         }
     }
 }

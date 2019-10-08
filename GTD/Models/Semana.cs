@@ -30,7 +30,7 @@ namespace GTD.Models
         //public int Duracao { get; set; }
 
         // FK
-        public virtual ICollection<Plano> Plano { get; set; }
+        //public virtual ICollection<Plano> Plano { get; set; } // plano não está ligado com semana
         public virtual ICollection<Treino> Treino { get; set; }
         public virtual ICollection<Dieta> Dieta { get; set; }
     }

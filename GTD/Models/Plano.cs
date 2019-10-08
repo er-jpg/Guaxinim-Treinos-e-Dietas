@@ -27,8 +27,8 @@ namespace GTD.Models
         // FK
         public virtual ICollection<Diario> Diario { get; set; }
 
-        public int? SemanaID { get; set; }
-        public Semana Semana { get; set; }
+        //public int? SemanaID { get; set; } // não está ligado com semana
+        //public Semana Semana { get; set; }
 
         public int? TreinoID { get; set; }
         public Treino Treino { get; set; }
