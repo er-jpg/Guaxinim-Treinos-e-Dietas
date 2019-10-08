@@ -49,7 +49,7 @@ namespace GTD.Controllers
         {
             // Começa a usar ViewModel para juntar as três tabelas
             DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
-            dsvm.Semanas = new SelectList(_context.Semana.ToList(), "SemanaID", "SemanaNum");
+            dsvm.Semanas = _context.Semana.Select( v => new SelectListItem { Text = v.SemanaNum.ToString(), Value = v.SemanaID.ToString() }).ToList();
             return View(dsvm);
         }
 
@@ -159,7 +159,7 @@ namespace GTD.Controllers
         {
             var umaSemana = new Semana()
             {
-                SemanaNum = _context.Semana.Max(s => s.SemanaNum),
+                SemanaNum = _context.Semana.Max(s => s.SemanaNum) + 1,
                 DataInicio = DateTime.Now,
                 DataFim = DateTime.Now.AddDays(7)
             };

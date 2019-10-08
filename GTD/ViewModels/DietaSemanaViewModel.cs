@@ -10,7 +10,7 @@ namespace GTD.ViewModels
     public class DietaSemanaViewModel
     {
         public int SemanaID { get; set; }
-        public SelectList Semanas { get; set; }
+        public List<SelectListItem> Semanas { get; set; }
         public string Texto { get; set; }
 
         // Dieta

@@ -19,7 +19,7 @@
         <div class="linha">
             @*<label asp-for="Semana"></label>*@
             @*<select asp-for="DietaSemana" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>*@
-            <select asp-for="SemanaID" asp-items="Model.Semanas" class="form-control" />
+            @Html.DropDownListFor(x => Model.SemanaID, new SelectList(Model.Semanas, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Semana" })
             @* botão pra criar semana *@
             <input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />
             @*<a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>*@
