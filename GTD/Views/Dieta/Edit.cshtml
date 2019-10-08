@@ -11,11 +11,11 @@
 
     <form asp-action="Edit" class="frm wide">
         <div asp-validation-summary="ModelOnly" class="erro"></div>
-        <input type="hidden" asp-for="DietaID" />
+        @*<input type="hidden" asp-for="DietaID" />*@
 
         <div class="linha">
-            <label asp-for="SemanaID"></label>
-            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>
+            @*<label asp-for="SemanaID"></label>
+            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>*@
         </div>
 
         <label asp-for="DietaNome"></label>

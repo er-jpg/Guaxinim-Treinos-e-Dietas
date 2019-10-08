@@ -22,8 +22,7 @@ namespace GTD.Controllers
         // GET: Dieta
         public async Task<IActionResult> Index()
         {
-            var gTDContext = _context.Dieta.Include(d => d.Semana);
-            return View(await gTDContext.ToListAsync());
+            return View(await _context.Dieta.ToListAsync());
         }
 
         // GET: Dieta/Details/5
@@ -35,7 +34,6 @@ namespace GTD.Controllers
             }
 
             var dieta = await _context.Dieta
-                .Include(d => d.Semana)
                 .FirstOrDefaultAsync(m => m.DietaID == id);
             if (dieta == null)
             {
@@ -48,7 +46,7 @@ namespace GTD.Controllers
         // GET: Dieta/Create
         public IActionResult Create()
         {
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID");
+            //ViewData["SemanaID"] = _context.Semana.Include(x => x.DietaSemana).ThenInclude(x => x.Semana);
             return View();
         }
 
@@ -57,7 +55,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DietaID,DietaNome,DescDieta,Duracao,DataDieta,Completo,SemanaID")] Dieta dieta)
+        public async Task<IActionResult> Create([Bind("DietaID,DietaNome,DescDieta,DataDieta,Completo")] Dieta dieta)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +63,6 @@ namespace GTD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", dieta.SemanaID);
             return View(dieta);
         }
 
@@ -82,7 +79,6 @@ namespace GTD.Controllers
             {
                 return NotFound();
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", dieta.SemanaID);
             return View(dieta);
         }
 
@@ -91,7 +87,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("DietaID,DietaNome,DescDieta,Duracao,DataDieta,Completo,SemanaID")] Dieta dieta)
+        public async Task<IActionResult> Edit(int? id, [Bind("DietaID,DietaNome,DescDieta,DataDieta,Completo")] Dieta dieta)
         {
             if (id != dieta.DietaID)
             {
@@ -118,7 +114,6 @@ namespace GTD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", dieta.SemanaID);
             return View(dieta);
         }
 
@@ -131,7 +126,6 @@ namespace GTD.Controllers
         //    }
 
         //    var dieta = await _context.Dieta
-        //        .Include(d => d.Semana)
         //        .FirstOrDefaultAsync(m => m.DietaID == id);
         //    if (dieta == null)
         //    {
@@ -167,7 +161,7 @@ namespace GTD.Controllers
                 DataFim = DateTime.Now.AddDays(7)
             };
             _context.Semana.Add(umaSemana);
-            _context.SaveChanges();            
+            _context.SaveChanges();
         }
     }
 }

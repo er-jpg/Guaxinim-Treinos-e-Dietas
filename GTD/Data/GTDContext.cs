@@ -28,5 +28,20 @@ namespace GTD.Data
         //{
         //    base.OnModelCreating(builder);
         //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<DietaSemana>().
+                HasKey(ds => new { ds.DietaID, ds.SemanaID });
+
+            modelBuilder.Entity<DietaSemana>().
+                HasOne(d => d.Dieta).WithMany(ds => ds.DietaSemana).
+                HasForeignKey(d => d.DietaID);
+
+            modelBuilder.Entity<DietaSemana>().
+                HasOne(s => s.Semana).WithMany(ds => ds.DietaSemana).
+                HasForeignKey(s => s.SemanaID);
+        }
     }
 }

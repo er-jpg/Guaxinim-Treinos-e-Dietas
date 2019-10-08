@@ -14,10 +14,10 @@ namespace GTD.Models
         [Display(Name = "Nome da Dieta")]
         public string DietaNome { get; set; }
 
-        [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Dieta")]
-        public string DescDieta { get; set; }
+        //[Required]
+        //[DataType(DataType.MultilineText)]
+        //[Display(Name = "Dieta")]
+        //public string DescDieta { get; set; }
 
         //[Required]
         //[Display(Name = "Duração")]
@@ -33,8 +33,10 @@ namespace GTD.Models
         // FK
         public virtual ICollection<Plano> Plano { get; set; }
 
+        //[Display(Name = "Selecione a Semana")]
+        //public int? SemanaID { get; set; }
+        //public Semana Semana { get; set; }
         [Display(Name = "Selecione a Semana")]
-        public int? SemanaID { get; set; }
-        public Semana Semana { get; set; }
+        public virtual ICollection<DietaSemana> DietaSemana { get; set; }
     }
 }
