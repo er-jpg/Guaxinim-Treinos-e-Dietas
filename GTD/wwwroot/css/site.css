@@ -216,6 +216,14 @@ li > a {
         margin-bottom: 1em;
     }
 
+.erro > p {
+    text-align: center;
+    background-color: var(--cancelaBtn);
+    color: white;
+    padding: 1em 0;
+    border-radius: 5px;
+}
+
 .back-claro {
     background-color: #EBEBEB !important;
 }

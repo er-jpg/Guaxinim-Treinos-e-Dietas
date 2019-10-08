@@ -54,7 +54,10 @@ $("#createWeek").click(function (e) {
     $.ajax({
         url: $(this).attr("href"), // comma here instead of semicolon   
         success: function () {
-            alert("Adicionado");  // or any other indication if you want to show
+            //alert("Adicionado");  // or any other indication if you want to show
+            //window.location.reload(true); // dá reload na hora do bagulho
+            $('.erro').append("<p>Criando nova semana.</p>");
+            setTimeout(location.reload.bind(location), 500); // reload com delay top
         }
     });
 });
