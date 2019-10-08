@@ -1,4 +1,4 @@
-﻿@model GTD.Models.Dieta
+﻿@model GTD.ViewModels.DietaSemanaViewModel
 
 @{
     ViewData["Title"] = "Criar Nova Dieta";
@@ -19,9 +19,10 @@
         <div class="linha">
             @*<label asp-for="Semana"></label>*@
             @*<select asp-for="DietaSemana" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>*@
+            <select asp-for="SemanaID" asp-items="Model.Semanas" class="form-control" />
             @* botão pra criar semana *@
-            <input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />
-            <a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>
+            @*<input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />*@
+            @*<a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>*@
         </div>
 
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
@@ -39,8 +40,8 @@
         </label>
 
         <p>Escreva a sua dieta seguindo o formato abaixo</p>
-        <textarea asp-for="DescDieta" class="form-control huge create" id="textareaMd"></textarea>
-        <span asp-validation-for="DescDieta" class="text-danger"></span>
+        <textarea asp-for="Texto" class="form-control huge create" id="textareaMd"></textarea>
+        <span asp-validation-for="Texto" class="text-danger"></span>
 
         <p><span class="icone comentario"></span>Ajuda com o formato.</p>
 

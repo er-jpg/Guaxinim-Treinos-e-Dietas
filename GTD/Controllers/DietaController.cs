@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GTD.Data;
 using GTD.Models;
+using GTD.ViewModels;
 
 namespace GTD.Controllers
 {
@@ -46,8 +47,10 @@ namespace GTD.Controllers
         // GET: Dieta/Create
         public IActionResult Create()
         {
-            //ViewData["SemanaID"] = _context.Semana.Include(x => x.DietaSemana).ThenInclude(x => x.Semana);
-            return View();
+            // Começa a usar ViewModel para juntar as três tabelas
+            DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
+            dsvm.Semanas = new SelectList(_context.Semana.ToList(), "SemanaID", "SemanaNum");
+            return View(dsvm);
         }
 
         // POST: Dieta/Create
