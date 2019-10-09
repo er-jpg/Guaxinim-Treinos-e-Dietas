@@ -10,9 +10,9 @@ namespace GTD.ViewModels
     public class DietaSemanaViewModel
     {
         public int SemanaID { get; set; }
-        [Required]
-        [Display(Name = "Selecione a Semana")]
-        public List<SelectListItem> Semanas { get; set; }
+        //[Required]
+        //[Display(Name = "Selecione a Semana")]
+        //public List<SelectListItem> Semanas { get; set; }
         public string Texto { get; set; }
 
         // Dieta

@@ -50,7 +50,7 @@ namespace GTD.Controllers
             // Começa a usar ViewModel para juntar as três tabelas
             // Funciona fazendo gambiarra com todas essas informações
             DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
-            dsvm.Semanas = _context.Semana.Select( v => new SelectListItem { Text = v.SemanaNum.ToString(), Value = v.SemanaID.ToString() }).ToList();
+            //dsvm.Semanas = _context.Semana.Select( v => new SelectListItem { Text = v.SemanaNum.ToString(), Value = v.SemanaID.ToString() }).ToList();
             return View(dsvm);
         }
 
@@ -59,7 +59,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Semana,DietaID,DietaNome,DescDieta,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Create([Bind("SemanaID,DietaID,DietaNome,DescDieta,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -71,13 +71,16 @@ namespace GTD.Controllers
                 dieta.DataDieta = vm.DataDieta;
                 dieta.DietaNome = vm.DietaNome;
 
-                semana.SemanaID = vm.SemanaID;
+                //semana.SemanaID = vm.SemanaID;
 
                 dietaSemana.DescDieta = vm.Texto;
+                dietaSemana.DietaID = dieta.DietaID;
+                dietaSemana.SemanaID = semana.SemanaID;
 
-                semana.DietaSemana = dieta.DietaSemana;
+                //semana.DietaSemana = dieta.DietaSemana;
 
                 _context.Dieta.Add(dieta);
+                _context.DietaSemana.Add(dietaSemana);
                 await _context.SaveChangesAsync();
 
                 //_context.Add(dieta);

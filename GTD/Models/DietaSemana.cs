@@ -8,9 +8,9 @@ namespace GTD.Models
 {
     public class DietaSemana
     {
-        public int DietaID { get; set; }
+        public int? DietaID { get; set; }
         public Dieta Dieta { get; set; }
-        public int SemanaID { get; set; }
+        public int? SemanaID { get; set; }
         public Semana Semana { get; set; }
 
         // campo extra pra fazer tudo funcionar supostamente

@@ -23,6 +23,9 @@ namespace GTD.Data
 
         public DbSet<GTD.Models.Semana> Semana { get; set; }
 
+        // n:m na gambiarra dessa merda pqp se foder porra ngm me ajuda nesse caralho
+        public DbSet<DietaSemana> DietaSemana { get; set; }
+
         // n:m mas não tem no nosso sistema
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
