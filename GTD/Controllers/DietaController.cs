@@ -59,20 +59,26 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Create([Bind("DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                Dieta dieta = new Dieta();
-                Semana semana = new Semana();
-
-                dieta.Completo = vm.Completo;
-                dieta.DataDieta = vm.DataDieta;
-                dieta.DietaNome = vm.DietaNome;
+                Dieta dieta = new Dieta
+                {
+                    Completo = vm.Completo,
+                    DataDieta = vm.DataDieta,
+                    DietaNome = vm.DietaNome
+                };
 
                 _context.Dieta.Add(dieta);
 
-                DietaSemana dietaSemana = new DietaSemana { Dieta = dieta, SemanaID = vm.SemanaID, DescDieta = vm.Texto };
+                DietaSemana dietaSemana = new DietaSemana
+                {
+                    Dieta = dieta,
+                    SemanaID = 1,
+                    DescDieta = vm.Texto
+                };
+
                 _context.DietaSemana.Add(dietaSemana);
 
                 await _context.SaveChangesAsync();

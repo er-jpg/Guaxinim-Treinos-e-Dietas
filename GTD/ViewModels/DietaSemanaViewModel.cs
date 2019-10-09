@@ -9,10 +9,10 @@ namespace GTD.ViewModels
 {
     public class DietaSemanaViewModel
     {
-        public int SemanaID { get; set; }
-        //[Required]
-        //[Display(Name = "Selecione a Semana")]
-        //public List<SelectListItem> Semanas { get; set; }
+        [Required(ErrorMessage = "É obrigatório a seleção de uma semana")]
+        public int? SemanaID { get; set; }
+        [Display(Name = "Selecione a Semana")]
+        public List<SelectListItem> Semanas { get; set; }
         public string Texto { get; set; }
 
         // Dieta
@@ -25,7 +25,7 @@ namespace GTD.ViewModels
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
-        [Display(Name = "Data da Dieta")]
+        [Display(Name = "Data de Início")]
         public DateTime DataDieta { get; set; }
         public bool Completo { get; set; }
     }

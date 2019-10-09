@@ -17,19 +17,12 @@
         <div asp-validation-summary="ModelOnly" class="erro"></div>
 
         <div class="linha">
-            <label asp-for="SemanaID"></label>
-            @*@Html.DropDownListFor(x => Model.SemanaID, new SelectList(Model.Semanas, "Value", "Text"), htmlAttributes: new { @class = "form-control esquerda", id = "Semana" })*@
-            @* botão pra criar semana *@
-            <input asp-for="SemanaID" class="form-control huge" placeholder="semana" />
-            <input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />
-            @*<a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>*@
+            <label>Criando dieta para a semana</label>
+            <input asp-for="SemanaID" class="form-control huge" value="1" disabled/>
         </div>
 
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
         <span asp-validation-for="DietaNome" class="text-danger"></span>
-
-        @*<input asp-for="Duracao" class="form-control huge" placeholder="Duração" />
-        <span asp-validation-for="Duracao" class="text-danger"></span>*@
 
         <label asp-for="DataDieta"></label>
         <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
@@ -46,6 +39,7 @@
         <p><span class="icone comentario"></span>Ajuda com o formato.</p>
 
         <div class="linha">
+            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" />
             <input type="submit" value="Salvar" class="bot" id="btnSave"  />
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>

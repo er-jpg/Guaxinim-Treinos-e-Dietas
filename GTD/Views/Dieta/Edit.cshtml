@@ -10,6 +10,14 @@
     </div>
 
     <form asp-action="Edit" class="frm wide">
+        @*<div class="linha">
+            <label asp-for="SemanaID"></label>
+            @Html.DropDownListFor(x => Model.SemanaID, new SelectList(Model.Semanas, "Value", "Text"), htmlAttributes: new { @class = "form-control esquerda", id = "Semana" })
+            botão pra criar semana 
+            <input asp-for="SemanaID" class="form-control huge" value="1" />
+            <input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />
+            <a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>
+        </div>*@
         <div asp-validation-summary="ModelOnly" class="erro"></div>
         @*<input type="hidden" asp-for="DietaID" />*@
 
