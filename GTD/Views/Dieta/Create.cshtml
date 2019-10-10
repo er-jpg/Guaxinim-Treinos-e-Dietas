@@ -10,15 +10,16 @@
     </div>
 
     <div class="erro">
-        
+        @Html.ValidationSummary()
     </div>
 
     <form asp-action="Create" class="frm wide">
         <div asp-validation-summary="ModelOnly" class="erro"></div>
 
         <div class="linha">
-            <label>Criando dieta para a semana</label>
-            <input asp-for="SemanaID" class="form-control huge" value="1" disabled/>
+            <label>Dieta para a semana</label>
+            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled/>
+            <input type="hidden" asp-for="SemanaID" />
         </div>
 
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />

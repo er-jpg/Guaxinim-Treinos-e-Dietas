@@ -50,7 +50,7 @@ namespace GTD.Controllers
             // Começa a usar ViewModel para juntar as três tabelas
             // Funciona fazendo gambiarra com todas essas informações
             DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
-            //dsvm.Semanas = _context.Semana.Select( v => new SelectListItem { Text = v.SemanaNum.ToString(), Value = v.SemanaID.ToString() }).ToList();
+            dsvm.SemanaID = 1;
             return View(dsvm);
         }
 
@@ -59,7 +59,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Create([Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace GTD.Controllers
         }
 
         // GET: Dieta/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int? semanaID)
         {
             if (id == null)
             {
@@ -101,7 +101,20 @@ namespace GTD.Controllers
             {
                 return NotFound();
             }
-            return View(dieta);
+
+            DietaSemanaViewModel dsvm = new DietaSemanaViewModel
+            {
+                DietaID = dieta.DietaID,
+                DataDieta = dieta.DataDieta,
+                Completo = dieta.Completo,
+                DietaNome = dieta.DietaNome
+            };
+
+            var dietaSemana = await _context.DietaSemana.Where(x => x.DietaID == id).FirstAsync();
+            dsvm.Texto = dietaSemana.DescDieta;
+            dsvm.SemanaID = dietaSemana.SemanaID;
+
+            return View(dsvm);
         }
 
         // POST: Dieta/Edit/5
@@ -109,9 +122,9 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("DietaID,DietaNome,DescDieta,DataDieta,Completo")] Dieta dieta)
+        public async Task<IActionResult> Edit(int? id, [Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
-            if (id != dieta.DietaID)
+            if (id != vm.DietaID)
             {
                 return NotFound();
             }
@@ -120,12 +133,12 @@ namespace GTD.Controllers
             {
                 try
                 {
-                    _context.Update(dieta);
+                    _context.Update(vm);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DietaExists(dieta.DietaID))
+                    if (!DietaExists(vm.DietaID))
                     {
                         return NotFound();
                     }
@@ -136,26 +149,8 @@ namespace GTD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(dieta);
+            return View(vm);
         }
-
-        // GET: Dieta/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var dieta = await _context.Dieta
-        //        .FirstOrDefaultAsync(m => m.DietaID == id);
-        //    if (dieta == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(dieta);
-        //}
 
         // POST: Dieta/Delete/5
         [HttpPost, ActionName("Delete")]

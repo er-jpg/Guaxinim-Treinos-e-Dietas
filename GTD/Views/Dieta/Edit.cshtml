@@ -1,4 +1,4 @@
-﻿@model GTD.Models.Dieta
+﻿@model GTD.ViewModels.DietaSemanaViewModel
 
 @{
     ViewData["Title"] = "Editando Dieta";
@@ -9,30 +9,23 @@
         <h2>Editando dieta: @Model.DietaNome</h2>
     </div>
 
+    <div class="erro">
+        @Html.ValidationSummary()
+    </div>
+
     <form asp-action="Edit" class="frm wide">
-        @*<div class="linha">
-            <label asp-for="SemanaID"></label>
-            @Html.DropDownListFor(x => Model.SemanaID, new SelectList(Model.Semanas, "Value", "Text"), htmlAttributes: new { @class = "form-control esquerda", id = "Semana" })
-            botão pra criar semana 
-            <input asp-for="SemanaID" class="form-control huge" value="1" />
-            <input type="button" name="response" value="Criar Semana" onclick="location.href='@Url.Action("AddOneWeek", "Dieta")'" class="bot bot-sec" />
-            <a asp-action="AddOneWeek" class="bot bot-sec" id="createWeek">Criar Nova Semana</a>
-        </div>*@
         <div asp-validation-summary="ModelOnly" class="erro"></div>
-        @*<input type="hidden" asp-for="DietaID" />*@
+
 
         <div class="linha">
-            @*<label asp-for="SemanaID"></label>
-            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>*@
+            <label>Dieta para a semana</label>
+            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
+            <input type="hidden" asp-for="SemanaID" />
         </div>
 
         <label asp-for="DietaNome"></label>
         <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
         <span asp-validation-for="DietaNome" class="text-danger"></span>
-
-        @*<label asp-for="DietaNome"></label>
-        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" />
-        <span asp-validation-for="Duracao" class="text-danger"></span>*@
 
         <label asp-for="DataDieta"></label>
         <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
@@ -42,13 +35,15 @@
             <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
         </label>
 
-        <p>Escreva a sua dieta em markdown.</p>
-        @*<textarea asp-for="DescDieta" class="form-control huge" id="textareaMd"></textarea>
-        <span asp-validation-for="DescDieta" class="text-danger"></span>*@
+        <p>Escreva a sua dieta seguindo o formato abaixo</p>
+        <textarea asp-for="Texto" class="form-control huge" id="textareaMd"></textarea>
+        <span asp-validation-for="Texto" class="text-danger"></span>
 
-        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
+        <a href="" rel="modal:open"><span class="icone comentario"></span>Ajuda com o formato.</a>
+
 
         <div class="linha">
+            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" />
             <input type="submit" value="Salvar" class="bot" id="btnSave" />
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>
