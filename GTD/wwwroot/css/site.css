@@ -309,7 +309,7 @@ section {
         margin: 0 auto;
     }
 
-    .frm > input {
+    .frm > input, #semana {
         font-size: 16px;
         padding: 20px 20px;
         margin-bottom: 10px;
@@ -331,6 +331,10 @@ section {
         min-height: 15vw;
         width: 18vw;
     }
+
+#semana {
+    width: 80px !important;
+}
 
 .wide {
     width: 48vw !important;

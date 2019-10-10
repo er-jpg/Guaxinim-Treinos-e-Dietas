@@ -39,12 +39,14 @@ $(document).on("click", "#abre-mol", function () {
 $(document).on("blur", "#textareaMd", function() {
     if (validateDays($('#textareaMd').val())) {
         $('#btnSave').removeAttr("disabled");
+        $('#btnNext').removeAttr("disabled");
         // gambiarra bonita, olha que linda pqp porque navegadro não funciona bem
         $('#textareaMd').css('box-shadow', '0px 0px 0px 0px white');
     }
     else {
         $('#textareaMd').css('box-shadow', '0px 0px 25px 0px rgba(225,110,112,1)');
-        $('#btnSave').attr("disabled", true);        
+        $('#btnSave').attr("disabled", true);
+        $('#btnNext').attr("disabled", true);
     }
 });
 
