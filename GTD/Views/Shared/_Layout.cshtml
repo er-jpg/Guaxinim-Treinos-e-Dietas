@@ -35,22 +35,22 @@
             @if (SignInManager.IsSignedIn(User))
             {
                 <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
-                <img class="svg" src="~/img/svg/user.svg">
+                <span class="icone usuario"></span>
                 @UserManager.GetUserName(User)
                 <!--a -->
                 <a class="btn" asp-controller="Infra" asp-action="Logout">
-                    <img class="svg" src="~/img/svg/logout.svg">
+                    <span class="icone sair"></span>
                     Logout
                 </a>
             }
             else
             {
                 <a class="btn" asp-controller="Infra" asp-action="Login">
-                    <img class="svg" src="~/img/svg/login.svg">
+                    <span class="icone entrar"></span>
                     Log in
                 </a>
                 <a class="btn" asp-controller="Infra" asp-action="Register">
-                    <img class="svg" src="~/img/svg/user-add.svg">
+                    <span class="icone sair"></span>
                     Registrar
                 </a>
             }

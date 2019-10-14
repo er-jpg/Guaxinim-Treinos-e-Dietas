@@ -27,21 +27,31 @@ namespace GTD.Controllers
         }
 
         // GET: Dieta/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? semanaID)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var dieta = await _context.Dieta
-                .FirstOrDefaultAsync(m => m.DietaID == id);
-            if (dieta == null)
+            var dieta = await _context.Dieta.FirstOrDefaultAsync(m => m.DietaID == id);
+            var dietaSemana = await _context.DietaSemana.FirstOrDefaultAsync(m => m.SemanaID == id);
+            if (dieta == null || dietaSemana == null)
             {
                 return NotFound();
             }
 
-            return View(dieta);
+            DietaSemanaViewModel vm = new DietaSemanaViewModel
+            {
+                Completo = dieta.Completo,
+                DataDieta = dieta.DataDieta,
+                DietaID = dieta.DietaID,
+                DietaNome = dieta.DietaNome,
+                SemanaID = dietaSemana.SemanaID,
+                Texto = dietaSemana.DescDieta
+            };
+
+            return View(vm);
         }
 
         // GET: Dieta/Create
@@ -49,8 +59,10 @@ namespace GTD.Controllers
         {
             // Começa a usar ViewModel para juntar as três tabelas
             // Funciona fazendo gambiarra com todas essas informações
-            DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
-            dsvm.SemanaID = 1;
+            DietaSemanaViewModel dsvm = new DietaSemanaViewModel
+            {
+                SemanaID = 1
+            };
             return View(dsvm);
         }
 
@@ -133,7 +145,22 @@ namespace GTD.Controllers
             {
                 try
                 {
-                    _context.Update(vm);
+                    Dieta dieta = new Dieta
+                    {
+                        DietaID = vm.DietaID,
+                        Completo = vm.Completo,
+                        DataDieta = vm.DataDieta,
+                        DietaNome = vm.DietaNome
+                    };
+                    _context.Update(dieta);
+
+                    DietaSemana dietaSemana = new DietaSemana
+                    {
+                        SemanaID = vm.SemanaID,
+                        DescDieta = vm.Texto,
+                        DietaID = vm.DietaID
+                    };
+                    _context.Update(dietaSemana);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -1,4 +1,4 @@
-﻿@model GTD.Models.Dieta
+﻿@model GTD.ViewModels.DietaSemanaViewModel
 
 @{
     ViewData["Title"] = "Informações";
@@ -11,8 +11,9 @@
 
     <form class="frm wide">
         <div class="linha">
-            @*<label asp-for="SemanaID"></label>
-            <select asp-for="SemanaID" class="form-control esquerda" asp-items="ViewBag.SemanaID"></select>*@
+            <label>Dieta para a semana</label>
+            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
+            <input type="hidden" asp-for="SemanaID" />
         </div>
 
         <label asp-for="DietaNome"></label>
@@ -29,12 +30,13 @@
         </label>
 
         <p>Escreva a sua dieta em markdown.</p>
-        @*<textarea asp-for="DescDieta" class="form-control huge" id="textareaMd" disabled></textarea>
-        <span asp-validation-for="DescDieta" class="text-danger"></span>*@
+        <textarea asp-for="Texto" class="form-control huge" id="textareaMd" disabled></textarea>
+        <span asp-validation-for="Texto" class="text-danger"></span>
 
         <p><span class="icone comentario"></span>Ajuda com markdown.</p>
 
         <div class="linha">
+            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" />
             <a asp-action="Edit" asp-route-id="@Model.DietaID" class="bot bot-sec">Editar</a>
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>

@@ -15,6 +15,8 @@
 
     <form asp-action="Edit" class="frm wide">
         <div asp-validation-summary="ModelOnly" class="erro"></div>
+        <input type="hidden" asp-for="DietaID" />
+        @*<input type="text" asp-for="DietaID"  disabled />*@
 
 
         <div class="linha">

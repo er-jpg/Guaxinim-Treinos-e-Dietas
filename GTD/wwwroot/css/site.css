@@ -43,6 +43,26 @@ h1, h2, h3, h4, h5, h6 {
         filter: invert(100%);
     }
 
+.usuario {
+    background-image: url("../img/svg/user.svg");
+    background-repeat: no-repeat;
+}
+
+.entrar {
+    background-image: url("../img/svg/login.svg");
+    background-repeat: no-repeat;
+}
+
+.sair {
+    background-image: url("../img/svg/user-add.svg");
+    background-repeat: no-repeat;
+}
+
+.sair {
+    background-image: url("../img/svg/logout.svg");
+    background-repeat: no-repeat;
+}
+
 .criar {
     background-image: url("../img/svg/plus-squared.svg");
     background-repeat: no-repeat;
@@ -113,15 +133,15 @@ li > a {
     li > a:hover {
         background: var(--verdeTerc);
         border-radius: 0.5em;
+        color: var(--braquinho);
+        font-weight: bolder;
     }
 
 .btn:hover {
     background-color: var(--verdeTerc);
     border-radius: 5px;
-}
-
-.svg {
-    height: 2em;
+    color: var(--braquinho);
+    font-weight: bolder;
 }
 
 /* MAIN DIV */
