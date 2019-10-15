@@ -108,6 +108,11 @@ namespace GTD.Controllers
                 return NotFound();
             }
 
+            if (semanaID == null)
+            {
+                semanaID = 1;
+            }
+
             var dieta = await _context.Dieta.FindAsync(id);
             if (dieta == null)
             {
@@ -124,7 +129,7 @@ namespace GTD.Controllers
 
             var dietaSemana = await _context.DietaSemana.Where(x => x.DietaID == id).FirstAsync();
             dsvm.Texto = dietaSemana.DescDieta;
-            dsvm.SemanaID = dietaSemana.SemanaID;
+            dsvm.SemanaID = semanaID;
 
             return View(dsvm);
         }
@@ -134,7 +139,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Edit(int? id, string salvar,[Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
             if (id != vm.DietaID)
             {
@@ -162,6 +167,16 @@ namespace GTD.Controllers
                     };
                     _context.Update(dietaSemana);
                     await _context.SaveChangesAsync();
+
+                    if (salvar.Equals("Próxima Semana"))
+                    {
+                        return View(Edit(vm.DietaID, vm.SemanaID + 1));
+                    }
+
+                    else if (salvar.Equals("Salvar"))
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -174,7 +189,7 @@ namespace GTD.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View(vm);
         }
