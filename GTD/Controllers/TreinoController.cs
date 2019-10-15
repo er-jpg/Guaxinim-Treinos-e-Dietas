@@ -22,8 +22,8 @@ namespace GTD.Controllers
         // GET: Treino
         public async Task<IActionResult> Index()
         {
-            var gTDContext = _context.Treino.Include(t => t.Semana);
-            return View(await gTDContext.ToListAsync());
+
+            return View();
         }
 
         // GET: Treino/Details/5
@@ -35,7 +35,6 @@ namespace GTD.Controllers
             }
 
             var treino = await _context.Treino
-                .Include(t => t.Semana)
                 .FirstOrDefaultAsync(m => m.TreinoID == id);
             if (treino == null)
             {
@@ -65,7 +64,7 @@ namespace GTD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", treino.SemanaID);
+            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID");
             return View(treino);
         }
 
@@ -82,7 +81,7 @@ namespace GTD.Controllers
             {
                 return NotFound();
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", treino.SemanaID);
+            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID");
             return View(treino);
         }
 
@@ -118,7 +117,7 @@ namespace GTD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID", treino.SemanaID);
+            ViewData["SemanaID"] = new SelectList(_context.Set<Semana>(), "SemanaID", "SemanaID");
             return View(treino);
         }
 
@@ -131,7 +130,6 @@ namespace GTD.Controllers
             }
 
             var treino = await _context.Treino
-                .Include(t => t.Semana)
                 .FirstOrDefaultAsync(m => m.TreinoID == id);
             if (treino == null)
             {

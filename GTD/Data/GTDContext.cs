@@ -12,19 +12,14 @@ namespace GTD.Data
     public class GTDContext : IdentityDbContext<Models.Infra.ApplicationUser>
     {
         public GTDContext(DbContextOptions<GTDContext> options) : base(options) {}
-
         public DbSet<Plano> Plano { get; set; }
-
         public DbSet<GTD.Models.Treino> Treino { get; set; }
-
         public DbSet<GTD.Models.Diario> Diario { get; set; }
-
         public DbSet<GTD.Models.Dieta> Dieta { get; set; }
-
         public DbSet<GTD.Models.Semana> Semana { get; set; }
-
         // n:m na gambiarra dessa merda pqp se foder porra ngm me ajuda nesse caralho
         public DbSet<DietaSemana> DietaSemana { get; set; }
+        public DbSet<TreinoSemana> TreinoSemana { get; set; }
 
         // n:m mas não tem no nosso sistema
         //protected override void OnModelCreating(ModelBuilder builder)
@@ -34,6 +29,7 @@ namespace GTD.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Dieta Semana
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DietaSemana>().
                 HasKey(ds => new { ds.DietaID, ds.SemanaID });
@@ -44,6 +40,19 @@ namespace GTD.Data
 
             modelBuilder.Entity<DietaSemana>().
                 HasOne(s => s.Semana).WithMany(ds => ds.DietaSemana).
+                HasForeignKey(s => s.SemanaID);
+
+            // Treino Semana
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TreinoSemana>().
+                HasKey(ts => new { ts.TreinoID, ts.SemanaID });
+
+            modelBuilder.Entity<TreinoSemana>().
+                HasOne(t => t.Treino).WithMany(ts => ts.TreinoSemana).
+                HasForeignKey(t => t.TreinoID);
+
+            modelBuilder.Entity<TreinoSemana>().
+                HasOne(s => s.Semana).WithMany(ts => ts.TreinoSemana).
                 HasForeignKey(s => s.SemanaID);
         }
     }

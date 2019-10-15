@@ -33,7 +33,9 @@ namespace GTD.Models
         // FK
         public virtual ICollection<Plano> Plano { get; set; }
 
-        public int? SemanaID { get; set; }
-        public Semana Semana { get; set; }
+        //public int? SemanaID { get; set; }
+        //public Semana Semana { get; set; }
+        [Display(Name = "Selecione a Semana")]
+        public virtual ICollection<TreinoSemana> TreinoSemana { get; set; }
     }
 }
