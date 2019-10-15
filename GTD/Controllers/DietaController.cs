@@ -211,7 +211,7 @@ namespace GTD.Controllers
         }
 
         // função pra adicionar semana
-        public void AddOneWeek()
+        private void AddOneWeek()
         {
             var umaSemana = new Semana()
             {
