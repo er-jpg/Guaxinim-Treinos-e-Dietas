@@ -23,7 +23,7 @@ namespace GTD.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View();
+            return View(await _context.Treino.ToListAsync());
         }
 
         // GET: Treino/Details/5
@@ -122,22 +122,22 @@ namespace GTD.Controllers
         }
 
         // GET: Treino/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var treino = await _context.Treino
-                .FirstOrDefaultAsync(m => m.TreinoID == id);
-            if (treino == null)
-            {
-                return NotFound();
-            }
+        //    var treino = await _context.Treino
+        //        .FirstOrDefaultAsync(m => m.TreinoID == id);
+        //    if (treino == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(treino);
-        }
+        //    return View(treino);
+        //}
 
         // POST: Treino/Delete/5
         [HttpPost, ActionName("Delete")]
