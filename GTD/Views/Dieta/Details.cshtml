@@ -35,8 +35,10 @@
 
         <p><span class="icone comentario"></span>Ajuda com markdown.</p>
 
+        @{ int? semanaPlus = Model.SemanaID + 1; }
+
         <div class="linha">
-            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" />
+            <a asp-action="Details" asp-route-id="@Model.DietaID" asp-route-semana="@semanaPlus" value="Próxima Semana" class="bot bot-sec" id="btnNext">Próxima Semana</a>
             <a asp-action="Edit" asp-route-id="@Model.DietaID" class="bot bot-sec">Editar</a>
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>

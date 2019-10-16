@@ -53,8 +53,11 @@ namespace GTD
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Infra/Login";
+                options.LoginPath = "/infra/login";
             });
+
+            // deixa tudo em minusculo
+            services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -68,7 +71,7 @@ namespace GTD
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/home/error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -82,7 +85,7 @@ namespace GTD
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=home}/{action=index}/{id?}");
             });
         }
     }

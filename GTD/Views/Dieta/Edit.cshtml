@@ -11,6 +11,12 @@
 
     <div class="erro">
         @Html.ValidationSummary()
+        @if (ViewBag.Erro != null)
+        {
+            <p>@ViewBag.Erro</p>
+            <script src="~/js/turnOff.js" asp-append-version="true"></script>
+
+        }
     </div>
 
     <form asp-action="Edit" class="frm wide">
@@ -21,8 +27,8 @@
 
         <div class="linha">
             <label>Dieta para a semana</label>
-            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
-            <input type="text" asp-for="SemanaID" />
+            <input asp-for="SemanaID" class="form-control huge" value="@ViewBag.Semana" id="semana" disabled />
+            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
         </div>
 
         <label asp-for="DietaNome"></label>
@@ -45,6 +51,7 @@
 
 
         <div class="linha">
+            @*<input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />*@
             <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />
             <input type="submit" value="Salvar" class="bot" id="btnSave" name="salvar" />
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>

@@ -27,7 +27,7 @@ namespace GTD.Controllers
         }
 
         // GET: Dieta/Details/5
-        public async Task<IActionResult> Details(int? id, int? semanaID)
+        public async Task<IActionResult> Details(int? id, int? semana)
         {
             if (id == null)
             {
@@ -35,7 +35,9 @@ namespace GTD.Controllers
             }
 
             var dieta = await _context.Dieta.FirstOrDefaultAsync(m => m.DietaID == id);
-            var dietaSemana = await _context.DietaSemana.FirstOrDefaultAsync(m => m.SemanaID == id);
+
+            if (semana == null) semana = 1;
+            var dietaSemana = await _context.DietaSemana.FirstOrDefaultAsync(m => m.SemanaID == semana);
             if (dieta == null || dietaSemana == null)
             {
                 return NotFound();
@@ -101,16 +103,16 @@ namespace GTD.Controllers
         }
 
         // GET: Dieta/Edit/5
-        public async Task<IActionResult> Edit(int? id, int? semanaID)
+        public async Task<IActionResult> Edit(int? id, int? semana)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            if (semanaID == null)
+            if (semana == null)
             {
-                semanaID = 1;
+                semana = 1;
             }
 
             var dieta = await _context.Dieta.FindAsync(id);
@@ -129,8 +131,9 @@ namespace GTD.Controllers
 
             var dietaSemana = await _context.DietaSemana.Where(x => x.DietaID == id).FirstAsync();
             dsvm.Texto = dietaSemana.DescDieta;
-            dsvm.SemanaID = semanaID;
+            //dsvm.SemanaID = semana;
 
+            ViewBag.Semana = semana;
             return View(dsvm);
         }
 
@@ -166,10 +169,19 @@ namespace GTD.Controllers
                         DietaID = vm.DietaID
                     };
                     _context.Update(dietaSemana);
-                    await _context.SaveChangesAsync();
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException)
+                    {
+                        ViewBag.Erro = "Semana não existe, favor ir para o create!\nNada foi salvo no sistema.";
+                    }
 
                     if (salvar.Equals("Próxima Semana"))
                     {
+                        if (vm.SemanaID == null) vm.SemanaID = 1;
                         return View(Edit(vm.DietaID, vm.SemanaID + 1));
                     }
 
