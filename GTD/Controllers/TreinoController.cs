@@ -23,12 +23,11 @@ namespace GTD.Controllers
         // GET: Treino
         public async Task<IActionResult> Index()
         {
-
             return View(await _context.Treino.ToListAsync());
         }
 
         // GET: Treino/Details/5
-        public async Task<IActionResult> Details(int? id, int? semanaID)
+        public async Task<IActionResult> Details(int? id, int? semana)
         {
             if (id == null)
             {
@@ -36,7 +35,9 @@ namespace GTD.Controllers
             }
 
             var treino = await _context.Treino.FirstOrDefaultAsync(m => m.TreinoID == id);
-            var treinoSemana = await _context.TreinoSemana.FirstOrDefaultAsync(m => m.SemanaID == semanaID);
+
+            if (semana == null) semana = 1;
+            var treinoSemana = await _context.TreinoSemana.FirstOrDefaultAsync(m => m.SemanaID == semana);
             if (treino == null || treinoSemana == null)
             {
                 return NotFound();
@@ -58,10 +59,8 @@ namespace GTD.Controllers
         // GET: Treino/Create
         public IActionResult Create()
         {
-            TreinoSemanaViewModel vm = new TreinoSemanaViewModel
-            {
-                SemanaID = 1
-            };
+            TreinoSemanaViewModel vm = new TreinoSemanaViewModel();
+            ViewBag.Semana = 1;
             return View(vm);
         }
 
@@ -70,7 +69,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SemanaID,TreinoID,TreinoNome,Texto,DataTreino,Completo")] TreinoSemanaViewModel vm)
+        public async Task<IActionResult> Create([Bind("SemanaID,TreinoID,TreinoNome,Texto,DataTreino,Completo")] TreinoSemanaViewModel vm, string salvar)
         {
             if (ModelState.IsValid)
             {
@@ -94,22 +93,29 @@ namespace GTD.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                if (salvar.Equals("Próxima Semana"))
+                {
+                    return RedirectToAction("Edit", new { id = _context.Treino.Max(o => o.TreinoID), semana = 2 });
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(vm);
         }
 
         // GET: Treino/Edit/5
-        public async Task<IActionResult> Edit(int? id, int? semanaID)
+        public async Task<IActionResult> Edit(int? id, int? semana)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            if (semanaID == null)
+            if (semana == null)
             {
-                semanaID = 1;
+                semana = 1;
             }
 
             var treino = await _context.Treino.FindAsync(id);
@@ -128,7 +134,7 @@ namespace GTD.Controllers
 
             var treinoSemana = await _context.TreinoSemana.Where(x => x.TreinoID == id).FirstOrDefaultAsync();
             vm.Texto = treinoSemana.DescTreino;
-            vm.SemanaID = semanaID;
+            vm.SemanaID = semana;
 
             return View(vm);
         }
@@ -164,12 +170,28 @@ namespace GTD.Controllers
                         DescTreino = vm.Texto,
                         TreinoID = vm.TreinoID
                     };
-                    _context.Update(treinoSemana);
+
+                    if (_context.TreinoSemana.Any(o => o.SemanaID == vm.SemanaID))
+                    {
+                        _context.Update(treinoSemana);
+                    }
+
+                    else
+                    {
+                        if (_context.Semana.Any(o => o.SemanaID == vm.SemanaID))
+                            AddOneWeek();
+
+                        _context.TreinoSemana.Add(treinoSemana);
+                    }
+
+
                     await _context.SaveChangesAsync();
 
                     if (salvar.Equals("Próxima Semana"))
                     {
-                        return View(Edit(vm.TreinoID, vm.SemanaID + 1));
+                        if (vm.SemanaID == null) vm.SemanaID = 1;
+                        TempData["SemanaID"] = vm.SemanaID + 1;
+                        return View(Edit(vm.TreinoID, null));
                     }
 
                     else if (salvar.Equals("Salvar"))

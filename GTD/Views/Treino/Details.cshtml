@@ -1,54 +1,48 @@
-﻿@model GTD.Models.Treino
+﻿@model GTD.ViewModels.TreinoSemanaViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Informações";
 }
 
-<h1>Details</h1>
+<div class="main">
+    <div class="indicador">
+        <h2>Dieta: @Html.DisplayFor(model => model.TreinoNome)</h2>
+    </div>
 
-<div>
-    <h4>Treino</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TreinoNome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TreinoNome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescTreino)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescTreino)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Duracao)
-        </dt>*@
-        @*<dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duracao)
-        </dd>*@
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataTreino)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataTreino)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Completo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Completo)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Semana)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Semana.SemanaID)
-        </dd>*@
-    </dl>
+    <form class="frm wide">
+        <div class="linha">
+            <label>Dieta para a semana</label>
+            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
+            <input type="hidden" asp-for="SemanaID" />
+        </div>
+
+        <label asp-for="TreinoNome"></label>
+        <input asp-for="TreinoNome" class="form-control huge" placeholder="Nome da Dieta" disabled />
+
+        @*<label asp-for="Duracao"></label>
+            <input asp-for="Duracao" class="form-control huge" placeholder="Duração" disabled />*@
+
+        <label asp-for="DataTreino"></label>
+        <input asp-for="DataTreino" class="form-control huge" placeholder="Data de Início" disabled />
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" disabled /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <p>Escreva a sua dieta em markdown.</p>
+        <textarea asp-for="Texto" class="form-control huge" id="textareaMd" disabled></textarea>
+        <span asp-validation-for="Texto" class="text-danger"></span>
+
+        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
+
+        @{ int? semanaPlus = Model.SemanaID + 1; }
+
+        <div class="linha">
+            <a asp-action="Details" asp-route-id="@Model.TreinoID" asp-route-semana="@semanaPlus" value="Próxima Semana" class="bot bot-sec" id="btnNext">Próxima Semana</a>
+            <a asp-action="Edit" asp-route-id="@Model.TreinoID" class="bot bot-sec">Editar</a>
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        </div>
+    </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TreinoID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<script src="~/js/textValidator.js" asp-append-version="true"></script>
