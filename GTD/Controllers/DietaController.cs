@@ -61,10 +61,7 @@ namespace GTD.Controllers
         {
             // Começa a usar ViewModel para juntar as três tabelas
             // Funciona fazendo gambiarra com todas essas informações
-            DietaSemanaViewModel dsvm = new DietaSemanaViewModel
-            {
-                SemanaID = 1
-            };
+            DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
             return View(dsvm);
         }
 
@@ -86,10 +83,12 @@ namespace GTD.Controllers
 
                 _context.Dieta.Add(dieta);
 
+                if (vm.SemanaID == null) vm.SemanaID = 1;
+
                 DietaSemana dietaSemana = new DietaSemana
                 {
                     Dieta = dieta,
-                    SemanaID = 1,
+                    SemanaID = vm.SemanaID,
                     DescDieta = vm.Texto
                 };
 
@@ -132,17 +131,28 @@ namespace GTD.Controllers
             var dietaSemana = await _context.DietaSemana.Where(x => x.DietaID == id).FirstAsync();
             dsvm.Texto = dietaSemana.DescDieta;
             //dsvm.SemanaID = semana;
+            //ViewBag.Semana = semana;
 
-            ViewBag.Semana = semana;
+            if (TempData["SemanaID"] == null)
+            {
+                ViewBag.Semana = semana;
+            }
+            else
+            {
+                ViewBag.Semana = TempData["SemanaID"];
+            }
+
             return View(dsvm);
         }
 
         // POST: Dieta/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // existe um erro com a versão do net core apresentando retorno de elemento async
+        // ¯\_(ツ)_/¯
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string salvar,[Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Edit(int? id, string salvar, [Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
         {
             if (id != vm.DietaID)
             {
@@ -168,21 +178,27 @@ namespace GTD.Controllers
                         DescDieta = vm.Texto,
                         DietaID = vm.DietaID
                     };
-                    _context.Update(dietaSemana);
 
-                    try
+                    if (_context.DietaSemana.Any(o => o.SemanaID == vm.SemanaID))
                     {
-                        await _context.SaveChangesAsync();
+                        _context.Update(dietaSemana);
                     }
-                    catch (DbUpdateException)
+
+                    else
                     {
-                        ViewBag.Erro = "Semana não existe, favor ir para o create!\nNada foi salvo no sistema.";
+                        if (_context.Semana.Any(o => o.SemanaID == vm.SemanaID))
+                            _context.Semana.Add(new Semana { SemanaNum = (int)vm.SemanaID });
+
+                        _context.DietaSemana.Add(dietaSemana);
                     }
+
+                    await _context.SaveChangesAsync();
 
                     if (salvar.Equals("Próxima Semana"))
                     {
                         if (vm.SemanaID == null) vm.SemanaID = 1;
-                        return View(Edit(vm.DietaID, vm.SemanaID + 1));
+                        TempData["SemanaID"] = vm.SemanaID + 1;
+                        return View(Edit(vm.DietaID, null));
                     }
 
                     else if (salvar.Equals("Salvar"))
