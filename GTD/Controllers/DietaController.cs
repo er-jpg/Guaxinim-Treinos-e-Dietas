@@ -62,6 +62,7 @@ namespace GTD.Controllers
             // Começa a usar ViewModel para juntar as três tabelas
             // Funciona fazendo gambiarra com todas essas informações
             DietaSemanaViewModel dsvm = new DietaSemanaViewModel();
+            ViewBag.Semana = 1;
             return View(dsvm);
         }
 
@@ -70,7 +71,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm)
+        public async Task<IActionResult> Create([Bind("SemanaID,DietaID,DietaNome,Texto,DataDieta,Completo")] DietaSemanaViewModel vm, string salvar)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +97,13 @@ namespace GTD.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                if (salvar.Equals("Próxima Semana"))
+                {
+                    return RedirectToAction("Edit", new { id = _context.Dieta.Max(o => o.DietaID), semana = 2 });
+                }
+                else {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(vm);
         }
@@ -187,7 +194,7 @@ namespace GTD.Controllers
                     else
                     {
                         if (_context.Semana.Any(o => o.SemanaID == vm.SemanaID))
-                            _context.Semana.Add(new Semana { SemanaNum = (int)vm.SemanaID });
+                            AddOneWeek();
 
                         _context.DietaSemana.Add(dietaSemana);
                     }
