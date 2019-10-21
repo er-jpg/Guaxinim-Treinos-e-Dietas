@@ -59,6 +59,8 @@ namespace GTD.Controllers
         // GET: Plano/Create
         public IActionResult Create()
         {
+            ViewBag.Treinos = new SelectList(_context.Treino, "TreinoID", "TreinoNome");
+            ViewBag.Dietas = new SelectList(_context.Dieta, "DietaID", "DietaNome");
             return View();
         }
 
@@ -67,7 +69,7 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlanoID,PlanoNome,Duracao,Completo")] Plano plano)
+        public async Task<IActionResult> Create([Bind("PlanoID,TreinoID,DietaID,Selecionado,PlanoNome,Duracao,Completo")] Plano plano)
         {
             if (ModelState.IsValid)
             {

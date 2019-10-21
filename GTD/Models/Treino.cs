@@ -14,10 +14,10 @@ namespace GTD.Models
         [Display(Name = "Nome do Treino")]
         public string TreinoNome { get; set; }
 
-        [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Treino")]
-        public string DescTreino { get; set; }
+        //[Required]
+        //[DataType(DataType.MultilineText)]
+        //[Display(Name = "Treino")]
+        //public string DescTreino { get; set; }
 
         //[Required]
         //[Display(Name = "Duração")]

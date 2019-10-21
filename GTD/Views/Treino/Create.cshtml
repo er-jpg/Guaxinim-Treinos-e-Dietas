@@ -22,12 +22,12 @@
         <div asp-validation-summary="ModelOnly" class="erro"></div>
 
         <div class="linha">
-            <label>Dieta para a semana</label>
+            <label>Treino para a semana</label>
             <input asp-for="SemanaID" class="form-control huge" id="semana" value="@ViewBag.Semana" disabled />
             <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
         </div>
 
-        <input asp-for="TreinoNome" class="form-control huge" placeholder="Nome da Dieta" />
+        <input asp-for="TreinoNome" class="form-control huge" placeholder="Nome do Treino" />
         <span asp-validation-for="TreinoNome" class="text-danger"></span>
 
         <label asp-for="DataTreino"></label>

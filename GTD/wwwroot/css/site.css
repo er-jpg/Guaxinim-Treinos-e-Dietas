@@ -441,9 +441,9 @@ section {
     margin: 0 auto;
 }
 
-    .linha > select {
-        padding: 5px;
-        margin: 0 0 5px 5px;
+    .linha > label {
+        display: inline-block;
+        width: 3em;
     }
 
     .linha > .bot {

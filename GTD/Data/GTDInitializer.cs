@@ -10,7 +10,7 @@ namespace GTD.Data
     {
         public static void Initialize(GTDContext context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (context.Semana.Any())
