@@ -82,10 +82,12 @@ namespace GTD.Controllers
 
                 _context.Treino.Add(treino);
 
+                if (vm.SemanaID == null) vm.SemanaID = 1;
+
                 TreinoSemana treinoSemana = new TreinoSemana
                 {
                     Treino = treino,
-                    SemanaID = 1,
+                    SemanaID = vm.SemanaID,
                     DescTreino = vm.Texto
                 };
 
@@ -135,6 +137,15 @@ namespace GTD.Controllers
             var treinoSemana = await _context.TreinoSemana.Where(x => x.TreinoID == id).FirstOrDefaultAsync();
             vm.Texto = treinoSemana.DescTreino;
             vm.SemanaID = semana;
+
+            if (TempData["SemanaID"] == null)
+            {
+                ViewBag.Semana = semana;
+            }
+            else
+            {
+                ViewBag.Semana = TempData["SemanaID"];
+            }
 
             return View(vm);
         }
