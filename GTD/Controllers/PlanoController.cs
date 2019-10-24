@@ -61,6 +61,9 @@ namespace GTD.Controllers
         {
             ViewBag.Treinos = new SelectList(_context.Treino, "TreinoID", "TreinoNome");
             ViewBag.Dietas = new SelectList(_context.Dieta, "DietaID", "DietaNome");
+
+            ViewData["Selec"] = new SelectList(_context.Treino, "TreinoID", "TreinoNome");
+
             return View();
         }
 

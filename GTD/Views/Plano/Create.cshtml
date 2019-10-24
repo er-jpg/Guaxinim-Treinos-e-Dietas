@@ -38,12 +38,12 @@
 
         <div class="linha">
             <label asp-for="TreinoID" class="control-label"></label>
-            @Html.DropDownList("TreinoID", (IEnumerable<SelectListItem>)ViewBag.Treinos, "", new { @class = "form-control" })
+            @Html.DropDownList("treino", ViewBag.Treinos as SelectList, "", new { @class = "form-control" })
             <span asp-validation-for="TreinoID" class="text-danger"></span>
         </div>
         <div class="linha">
             <label asp-for="DietaID" class="control-label"></label>
-            @Html.DropDownList("DietaID", (IEnumerable<SelectListItem>)ViewBag.Dietas, "", new { @class = "form-control" })
+            @Html.DropDownList("dieta", ViewBag.Dietas as SelectList, "", new { @class = "form-control" })
             <span asp-validation-for="DietaID" class="text-danger"></span>
         </div>
 
