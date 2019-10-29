@@ -265,6 +265,12 @@ li > a {
     cursor: pointer;
 }
 
+.fit {
+    min-width: 380px;
+    height: 350px;
+    margin: 0 auto;
+}
+
 /* FOOTER */
 
 footer {
@@ -462,7 +468,7 @@ section {
 }
 
 .modal > .frm > input {
-    width: 18vw;
+    width: 18vw !important;
     text-align: center;
     margin: 0 auto;
     margin-top: 1em;

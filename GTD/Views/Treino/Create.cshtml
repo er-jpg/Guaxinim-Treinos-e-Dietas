@@ -42,7 +42,7 @@
         <textarea asp-for="Texto" class="form-control huge create" id="textareaMd"></textarea>
         <span asp-validation-for="Texto" class="text-danger"></span>
 
-        <p><span class="icone comentario"></span>Ajuda com o formato.</p>
+        <p><a href="#ajudaFormato" rel="modal:open"><span class="icone comentario"></span></a>Ajuda com o formato.</p>
 
         <div class="linha">
             <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />
@@ -50,7 +50,11 @@
             <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
         </div>
     </form>
+</div>
 
+<div id="ajudaFormato" class="modal">
+    <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
+    <a href="#" rel="modal:close" class="bot bot-alert">Fechar</a>
 </div>
 
 <script src="~/js/textValidator.js" asp-append-version="true"></script>
