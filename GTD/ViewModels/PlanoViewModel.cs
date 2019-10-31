@@ -1,4 +1,5 @@
-﻿using GTD.Models.Infra;
+﻿using GTD.Models;
+using GTD.Models.Infra;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTD.Models
+namespace GTD.ViewModels
 {
-    public class Plano
+    public class PlanoViewModel
     {
         public int? PlanoID { get; set; }
 
@@ -35,20 +36,9 @@ namespace GTD.Models
         public string UserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        // FK
-        public virtual ICollection<Diario> Diario { get; set; }
-
-        //public int? SemanaID { get; set; } // não está ligado com semana
-        //public Semana Semana { get; set; }
-
-        [Required]
-        [Display(Name = "Treino")]
-        public int? TreinoID { get; set; }
-        public Treino Treino { get; set; }
-
-        [Required]
-        [Display(Name = "Dieta")]
-        public int? DietaID { get; set; }
-        public Dieta Dieta { get; set; }
+        public int TreinoID { get; set; }
+        public int DietaID { get; set; }
+        public IEnumerable<SelectListItem> Treinos { get; set; }
+        public IEnumerable<SelectListItem> Dietas { get; set; }
     }
 }

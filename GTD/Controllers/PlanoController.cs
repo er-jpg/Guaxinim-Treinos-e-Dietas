@@ -10,6 +10,7 @@ using GTD.Models;
 using Microsoft.AspNetCore.Identity;
 using GTD.Models.Infra;
 using Microsoft.AspNetCore.Authorization;
+using GTD.ViewModels;
 
 namespace GTD.Controllers
 {
@@ -20,8 +21,8 @@ namespace GTD.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public PlanoController(GTDContext context, 
-            UserManager<ApplicationUser> userManager, 
+        public PlanoController(GTDContext context,
+            UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
@@ -59,9 +60,28 @@ namespace GTD.Controllers
         // GET: Plano/Create
         public IActionResult Create()
         {
-            ViewBag.Treinos = new SelectList(_context.Treino, "TreinoID", "TreinoNome");
-            ViewBag.Dietas = new SelectList(_context.Dieta, "DietaID", "DietaNome");
-            return View();
+            //ViewBag.Treinos = new SelectList(_context.Treino.ToList(), "TreinoID", "TreinoNome");
+            //ViewBag.Dietas = new SelectList(_context.Dieta.ToList(), "DietaID", "DietaNome");
+            var plano = new PlanoViewModel
+            {
+                Treinos = from t in _context.Treino
+                          select new SelectListItem
+                          {
+                              Selected = t.TreinoID.ToString() == "Ativo",
+                              Text = t.TreinoNome,
+                              Value = t.TreinoNome
+                          },
+
+                Dietas = from d in _context.Dieta
+                         select new SelectListItem
+                         {
+                             Selected = d.DietaID.ToString() == "Ativo",
+                             Text = d.DietaNome,
+                             Value = d.DietaNome
+                         },
+            };
+
+            return View(plano);
         }
 
         // POST: Plano/Create
@@ -69,17 +89,31 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlanoID,TreinoID,DietaID,Selecionado,PlanoNome,Duracao,Completo")] Plano plano)
+        public async Task<IActionResult> Create([Bind("PlanoID,TreinoID,DietaID,Selecionado,PlanoNome,Duracao,Completo")] PlanoViewModel param)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                plano.UserID = user.Id;
-                _context.Add(plano);
+                param.UserID = user.Id;
+
+                Plano plano = new Plano
+                {
+                    ApplicationUser = param.ApplicationUser,
+                    UserID = param.UserID,
+                    Completo = param.Completo,
+                    DietaID = param.DietaID,
+                    TreinoID = param.TreinoID,
+                    Duracao = param.Duracao,
+                    PlanoNome = param.PlanoNome,
+                    Selecionado = param.Selecionado,
+                    SemanaInicio = param.SemanaInicio
+                };
+
+                _context.Add(param);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(plano);
+            return View(param);
         }
 
         // GET: Plano/Edit/5
