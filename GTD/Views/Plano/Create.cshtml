@@ -1,4 +1,4 @@
-﻿@model GTD.ViewModels.PlanoViewModel;
+﻿@model GTD.Models.Plano;
 
 @{
     ViewData["Title"] = "Criando novo plano";
@@ -37,14 +37,14 @@
         </label>
 
         <div class="linha">
-            <label asp-for="Treinos" class="control-label"></label>
-            @Html.DropDownListFor(model => model.TreinoID, Model.Treinos, "TreinoID", "TreinoNome")
-            <span asp-validation-for="Treinos" class="text-danger"></span>
+            <label asp-for="TreinoID" class="control-label"></label>
+            <select asp-for="TreinoID" class="form-control" asp-items="@(new SelectList(ViewBag.Treinos, "TreinoID", "TreinoNome"))"></select>
+            <span asp-validation-for="TreinoID" class="text-danger"></span>
         </div>
         <div class="linha">
-            <label asp-for="Dietas" class="control-label"></label>
-            @Html.DropDownListFor(model => model.DietaID, Model.Dietas, "DietaID", "DietaNome")
-            <span asp-validation-for="Dietas" class="text-danger"></span>
+            <label asp-for="DietaID" class="control-label"></label>
+            <select asp-for="DietaID" class="form-control" asp-items="@(new SelectList(ViewBag.Dietas, "DietaID", "DietaNome"))"></select>
+            <span asp-validation-for="TreinoID" class="text-danger"></span>
         </div>
 
         <div class="linha">
