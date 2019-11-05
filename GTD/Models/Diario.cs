@@ -13,7 +13,7 @@ namespace GTD.Models
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
-        public DateTime DataDiario { get; set; }
+        public DateTime? DataDiario { get; set; } = DateTime.Now;
 
         [Required]
         public bool CompletoTreino{ get; set; }
