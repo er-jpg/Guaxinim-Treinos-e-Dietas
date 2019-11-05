@@ -54,6 +54,8 @@ namespace GTD.Controllers
                 return NotFound();
             }
 
+            ViewBag.Dieta = _context.Plano.Include(x => x.Dieta).FirstOrDefaultAsync(x => x.PlanoID == id);
+            ViewBag.Treino = _context.Plano.Include(x => x.Treino).FirstOrDefaultAsync(x => x.PlanoID == id);
             return View(plano);
         }
 

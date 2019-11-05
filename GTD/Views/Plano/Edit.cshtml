@@ -4,41 +4,61 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Plano</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PlanoID" />
-            <div class="form-group">
-                <label asp-for="Duracao" class="control-label"></label>
-                <input asp-for="Duracao" class="form-control" />
-                <span asp-validation-for="Duracao" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserID" class="control-label"></label>
-                <input asp-for="UserID" class="form-control" />
-                <span asp-validation-for="UserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="main">
+    <div class="indicador">
+        <h2>Editando plano</h2>
     </div>
+
+    <div class="erro">
+        @Html.ValidationSummary()
+        @if (ViewBag.Erro != null)
+        {
+            <p>@ViewBag.Erro</p>
+
+        }
+    </div>
+
+    <form asp-action="Edit" class="frm wide">
+        <div asp-validation-summary="ModelOnly" class="erro"></div>
+
+        <input asp-for="PlanoNome" class="form-control huge" placeholder="Nome do Plano" />
+        <span asp-validation-for="PlanoNome" class="text-danger"></span>
+
+        <label asp-for="SemanaInicio"></label>
+        <input asp-for="SemanaInicio" class="form-control huge" placeholder="Data de Início" />
+        <span asp-validation-for="SemanaInicio" class="text-danger"></span>
+
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração em Semanas" />
+        <span asp-validation-for="Duracao" class="text-danger"></span>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Selecionado" /> Selecionar como plano principal
+        </label>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <div class="linha">
+            <label asp-for="TreinoID" class="control-label"></label>
+            <select asp-for="TreinoID" class="form-control" asp-items="@(new SelectList(ViewBag.Treinos, "TreinoID", "TreinoNome"))"></select>
+            <span asp-validation-for="TreinoID" class="text-danger"></span>
+        </div>
+        <div class="linha">
+            <label asp-for="DietaID" class="control-label"></label>
+            <select asp-for="DietaID" class="form-control" asp-items="@(new SelectList(ViewBag.Dietas, "DietaID", "DietaNome"))"></select>
+            <span asp-validation-for="TreinoID" class="text-danger"></span>
+        </div>
+
+        <div class="linha">
+            <input type="submit" value="Salvar" class="bot" id="btnSave" name="salvar" />
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        </div>
+    </form>
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script src="~/js/textValidator.js" asp-append-version="true"></script>
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
