@@ -3,7 +3,6 @@ using System;
 using GTD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GTD.Migrations
@@ -15,21 +14,19 @@ namespace GTD.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity("GTD.Models.Diario", b =>
                 {
                     b.Property<int?>("DiarioID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("CompletoDieta");
 
                     b.Property<bool>("CompletoTreino");
 
-                    b.Property<DateTime>("DataDiario");
+                    b.Property<DateTime?>("DataDiario")
+                        .IsRequired();
 
                     b.Property<string>("PlanoID");
 
@@ -45,8 +42,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Dieta", b =>
                 {
                     b.Property<int?>("DietaID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Completo");
 
@@ -121,8 +117,7 @@ namespace GTD.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -130,8 +125,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Plano", b =>
                 {
                     b.Property<int?>("PlanoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ApplicationUserId");
 
@@ -141,7 +135,13 @@ namespace GTD.Migrations
 
                     b.Property<int>("Duracao");
 
-                    b.Property<int>("PlanoNome");
+                    b.Property<string>("PlanoNome")
+                        .IsRequired();
+
+                    b.Property<bool>("Selecionado");
+
+                    b.Property<DateTime?>("SemanaInicio")
+                        .IsRequired();
 
                     b.Property<int?>("TreinoID");
 
@@ -161,8 +161,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Semana", b =>
                 {
                     b.Property<int?>("SemanaID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DataFim")
                         .IsRequired();
@@ -179,14 +178,11 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Treino", b =>
                 {
                     b.Property<int?>("TreinoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Completo");
 
-                    b.Property<DateTime>("DataTreino");
-
-                    b.Property<string>("DescTreino")
+                    b.Property<DateTime?>("DataTreino")
                         .IsRequired();
 
                     b.Property<string>("TreinoNome")
@@ -231,8 +227,7 @@ namespace GTD.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -240,8 +235,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -260,8 +254,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 

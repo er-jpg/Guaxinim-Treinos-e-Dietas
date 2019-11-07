@@ -3,35 +3,32 @@ using System;
 using GTD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GTD.Migrations
 {
     [DbContext(typeof(GTDContext))]
-    [Migration("20191008180440_DietaSemana")]
-    partial class DietaSemana
+    [Migration("20191107122407_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity("GTD.Models.Diario", b =>
                 {
                     b.Property<int?>("DiarioID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("CompletoDieta");
 
                     b.Property<bool>("CompletoTreino");
 
-                    b.Property<DateTime>("DataDiario");
+                    b.Property<DateTime?>("DataDiario")
+                        .IsRequired();
 
                     b.Property<string>("PlanoID");
 
@@ -47,15 +44,11 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Dieta", b =>
                 {
                     b.Property<int?>("DietaID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Completo");
 
                     b.Property<DateTime>("DataDieta");
-
-                    b.Property<string>("DescDieta")
-                        .IsRequired();
 
                     b.Property<string>("DietaNome")
                         .IsRequired();
@@ -67,9 +60,12 @@ namespace GTD.Migrations
 
             modelBuilder.Entity("GTD.Models.DietaSemana", b =>
                 {
-                    b.Property<int>("DietaID");
+                    b.Property<int?>("DietaID");
 
-                    b.Property<int>("SemanaID");
+                    b.Property<int?>("SemanaID");
+
+                    b.Property<string>("DescDieta")
+                        .IsRequired();
 
                     b.HasKey("DietaID", "SemanaID");
 
@@ -123,8 +119,7 @@ namespace GTD.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -132,8 +127,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Plano", b =>
                 {
                     b.Property<int?>("PlanoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ApplicationUserId");
 
@@ -143,7 +137,13 @@ namespace GTD.Migrations
 
                     b.Property<int>("Duracao");
 
-                    b.Property<int>("PlanoNome");
+                    b.Property<string>("PlanoNome")
+                        .IsRequired();
+
+                    b.Property<bool>("Selecionado");
+
+                    b.Property<DateTime?>("SemanaInicio")
+                        .IsRequired();
 
                     b.Property<int?>("TreinoID");
 
@@ -163,8 +163,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Semana", b =>
                 {
                     b.Property<int?>("SemanaID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DataFim")
                         .IsRequired();
@@ -181,26 +180,35 @@ namespace GTD.Migrations
             modelBuilder.Entity("GTD.Models.Treino", b =>
                 {
                     b.Property<int?>("TreinoID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Completo");
 
-                    b.Property<DateTime>("DataTreino");
-
-                    b.Property<string>("DescTreino")
+                    b.Property<DateTime?>("DataTreino")
                         .IsRequired();
-
-                    b.Property<int?>("SemanaID");
 
                     b.Property<string>("TreinoNome")
                         .IsRequired();
 
                     b.HasKey("TreinoID");
 
+                    b.ToTable("Treino");
+                });
+
+            modelBuilder.Entity("GTD.Models.TreinoSemana", b =>
+                {
+                    b.Property<int?>("TreinoID");
+
+                    b.Property<int?>("SemanaID");
+
+                    b.Property<string>("DescTreino")
+                        .IsRequired();
+
+                    b.HasKey("TreinoID", "SemanaID");
+
                     b.HasIndex("SemanaID");
 
-                    b.ToTable("Treino");
+                    b.ToTable("TreinoSemana");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -221,8 +229,7 @@ namespace GTD.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -230,8 +237,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -250,8 +256,7 @@ namespace GTD.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -348,11 +353,17 @@ namespace GTD.Migrations
                         .HasForeignKey("TreinoID");
                 });
 
-            modelBuilder.Entity("GTD.Models.Treino", b =>
+            modelBuilder.Entity("GTD.Models.TreinoSemana", b =>
                 {
                     b.HasOne("GTD.Models.Semana", "Semana")
-                        .WithMany("Treino")
-                        .HasForeignKey("SemanaID");
+                        .WithMany("TreinoSemana")
+                        .HasForeignKey("SemanaID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GTD.Models.Treino", "Treino")
+                        .WithMany("TreinoSemana")
+                        .HasForeignKey("TreinoID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

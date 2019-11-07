@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GTD.Migrations
 {
-    public partial class DietaSemana : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,9 +51,8 @@ namespace GTD.Migrations
                 columns: table => new
                 {
                     DietaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     DietaNome = table.Column<string>(nullable: false),
-                    DescDieta = table.Column<string>(nullable: false),
                     DataDieta = table.Column<DateTime>(nullable: false),
                     Completo = table.Column<bool>(nullable: false)
                 },
@@ -68,7 +66,7 @@ namespace GTD.Migrations
                 columns: table => new
                 {
                     SemanaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     SemanaNum = table.Column<int>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     DataFim = table.Column<DateTime>(nullable: false)
@@ -79,11 +77,26 @@ namespace GTD.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Treino",
+                columns: table => new
+                {
+                    TreinoID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TreinoNome = table.Column<string>(nullable: false),
+                    DataTreino = table.Column<DateTime>(nullable: false),
+                    Completo = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Treino", x => x.TreinoID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -104,7 +117,7 @@ namespace GTD.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -189,7 +202,8 @@ namespace GTD.Migrations
                 columns: table => new
                 {
                     DietaID = table.Column<int>(nullable: false),
-                    SemanaID = table.Column<int>(nullable: false)
+                    SemanaID = table.Column<int>(nullable: false),
+                    DescDieta = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,37 +223,16 @@ namespace GTD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Treino",
-                columns: table => new
-                {
-                    TreinoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TreinoNome = table.Column<string>(nullable: false),
-                    DescTreino = table.Column<string>(nullable: false),
-                    DataTreino = table.Column<DateTime>(nullable: false),
-                    Completo = table.Column<bool>(nullable: false),
-                    SemanaID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Treino", x => x.TreinoID);
-                    table.ForeignKey(
-                        name: "FK_Treino_Semana_SemanaID",
-                        column: x => x.SemanaID,
-                        principalTable: "Semana",
-                        principalColumn: "SemanaID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Plano",
                 columns: table => new
                 {
                     PlanoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PlanoNome = table.Column<int>(nullable: false),
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PlanoNome = table.Column<string>(nullable: false),
                     Duracao = table.Column<int>(nullable: false),
                     Completo = table.Column<bool>(nullable: false),
+                    SemanaInicio = table.Column<DateTime>(nullable: false),
+                    Selecionado = table.Column<bool>(nullable: false),
                     UserID = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     TreinoID = table.Column<int>(nullable: true),
@@ -269,11 +262,36 @@ namespace GTD.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TreinoSemana",
+                columns: table => new
+                {
+                    TreinoID = table.Column<int>(nullable: false),
+                    SemanaID = table.Column<int>(nullable: false),
+                    DescTreino = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TreinoSemana", x => new { x.TreinoID, x.SemanaID });
+                    table.ForeignKey(
+                        name: "FK_TreinoSemana_Semana_SemanaID",
+                        column: x => x.SemanaID,
+                        principalTable: "Semana",
+                        principalColumn: "SemanaID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TreinoSemana_Treino_TreinoID",
+                        column: x => x.TreinoID,
+                        principalTable: "Treino",
+                        principalColumn: "TreinoID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Diario",
                 columns: table => new
                 {
                     DiarioID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     DataDiario = table.Column<DateTime>(nullable: false),
                     CompletoTreino = table.Column<bool>(nullable: false),
                     CompletoDieta = table.Column<bool>(nullable: false),
@@ -300,8 +318,7 @@ namespace GTD.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -327,8 +344,7 @@ namespace GTD.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Diario_PlanoID1",
@@ -356,8 +372,8 @@ namespace GTD.Migrations
                 column: "TreinoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Treino_SemanaID",
-                table: "Treino",
+                name: "IX_TreinoSemana_SemanaID",
+                table: "TreinoSemana",
                 column: "SemanaID");
         }
 
@@ -385,10 +401,16 @@ namespace GTD.Migrations
                 name: "DietaSemana");
 
             migrationBuilder.DropTable(
+                name: "TreinoSemana");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Plano");
+
+            migrationBuilder.DropTable(
+                name: "Semana");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -398,9 +420,6 @@ namespace GTD.Migrations
 
             migrationBuilder.DropTable(
                 name: "Treino");
-
-            migrationBuilder.DropTable(
-                name: "Semana");
         }
     }
 }

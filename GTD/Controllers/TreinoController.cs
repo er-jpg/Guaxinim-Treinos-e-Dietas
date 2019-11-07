@@ -46,7 +46,7 @@ namespace GTD.Controllers
             TreinoSemanaViewModel vm = new TreinoSemanaViewModel
             {
                 Completo = treino.Completo,
-                DataTreino = treino.DataTreino,
+                DataTreino = treino.DataTreino??DateTime.Now,
                 TreinoID = treino.TreinoID,
                 TreinoNome = treino.TreinoNome,
                 SemanaID = treinoSemana.SemanaID,
@@ -129,7 +129,7 @@ namespace GTD.Controllers
             TreinoSemanaViewModel vm = new TreinoSemanaViewModel
             {
                 TreinoID = treino.TreinoID,
-                DataTreino = treino.DataTreino,
+                DataTreino = treino.DataTreino??DateTime.Now,
                 Completo = treino.Completo,
                 TreinoNome = treino.TreinoNome
             };
