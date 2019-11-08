@@ -29,8 +29,9 @@ namespace GTD
         public void ConfigureServices(IServiceCollection services)
         {
             // Conexão com o EFCore no windows com o sqlserver
-            //services.AddDbContext<GTDContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GTDConnection")));
-            services.AddDbContext<GTDContext>(options => options.UseSqlite(Configuration.GetConnectionString("GTDsqlite")));
+            services.AddDbContext<GTDContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GTDConnection")));
+            // Conexão com o SQLite
+            //services.AddDbContext<GTDContext>(options => options.UseSqlite(Configuration.GetConnectionString("GTDsqlite")));
 
             //services.Configure<CookiePolicyOptions>(options =>
             //{
