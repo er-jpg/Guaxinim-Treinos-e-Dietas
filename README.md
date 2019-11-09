@@ -1,25 +1,32 @@
 
 # Guaxinim-Treinos-e-Dietas
-O seu gerenciador de treinos fÌsicos e dietas.
+O seu gerenciador de treinos f√≠sicos e dietas.
 
 ## Sobre
-O sistema È uma aplicaÁ„o web com base no .Net Core 2.2 com integraÁ„o do Entity Framework da mesma vers„o.
-Por conta de como o sistema foi desenvolvido, n„o h· a portabilidade para outros sistemas operacionais alÈm do Windows.
+O sistema √© uma aplica√ß√£o web com base no .Net Core 2.2 com integra√ß√£o do Entity Framework da mesma vers√£o.
+Por conta de como o sistema foi desenvolvido, o padr√£o do sistema √© rodar no Windows, por√©m para que rode em qualquer outro sistema operacional √© necess√°rio apenas trocar qual o banco de dados para a aplica√ß√£o.
 
-### PrÈ-requisitos
-… necess·ria a vers„o .Net Core SDK 2.2 para que o sistema seja compilado, para que exista o banco de dados a partir do Entity Framework È possÌvel a necessidade que o sistema possua uma instalaÁ„o do SSMS (SQL Server Management Studio).
+### Configura√ß√µes
+Al√©m da possibilidade de usar como padr√£o o SSMS como principal banco de dados, h√° a possibilidade para usar o SQLite como banco, para isso j√° existe a connection string como padr√£o do sistema.
 
-O sistema rodar· a partir de apenas um comando no console dentro da pasta raiz
+Para trocar, √© necess√°rio apenas comentar a linha onde a conex√£o √© feita usando o SqlServer para a linha com o SQLite no arquivo ``` Startup.cs ```.
+
+O arquivo de banco ser√° gerado na pasta base do sistema com o nome de ``` GTD.db ```.
+
+### Pr√©-requisitos
+√â necess√°ria a vers√£o .Net Core SDK 2.2 para que o sistema seja compilado, para que exista o banco de dados a partir do Entity Framework √© poss√≠vel a necessidade que o sistema possua uma instala√ß√£o do SSMS (SQL Server Management Studio).
+
+O sistema rodar√° a partir de apenas um comando no console dentro da pasta raiz
 
 ```dotnet run```
 
-Qualquer problema favor reportar na parte de _issues_ deste mesmo repositÛrio.
+Qualquer problema favor reportar na parte de _issues_ deste mesmo reposit√≥rio.
 
 ### Planos Futuros
-J· existem ideias para novas funcionalidades serem instaladas no sistema, alÈm do que est· contido na documentaÁ„o, existe tambÈm a ideia de manter um jornal com o desenvolvimento do usu·rio conforme cada plano È concluÌdo, essa ideia veio apÛs o primeiro planejamento do sistema e quando foi calculado o tempo de desenvolvimento n„o coube junto com o calend·rio proposto para o trabalho ser concluÌdo.
+J√° existem ideias para novas funcionalidades serem instaladas no sistema, al√©m do que est√° contido na documenta√ß√£o, existe tamb√©m a ideia de manter um jornal com o desenvolvimento do usu√°rio conforme cada plano √© conclu√≠do, essa ideia veio ap√≥s o primeiro planejamento do sistema e quando foi calculado o tempo de desenvolvimento n√£o coube junto com o calend√°rio proposto para o trabalho ser conclu√≠do.
 
-Outra parte È de adicionar informaÁıes sobre o usu·rio, com esse plano de jornal e desenvolvimento, pode-se atÈ pensar em criar perfis para cada usu·rio e existir quase uma comunidade entre usu·rios do sistema.
+Outra parte √© de adicionar informa√ß√µes sobre o usu√°rio, com esse plano de jornal e desenvolvimento, pode-se at√© pensar em criar perfis para cada usu√°rio e existir quase uma comunidade entre usu√°rios do sistema.
  
 ## Ideia
-A ideia do sistema È para um TCC do curso tÈcnico em desenvolvimento de sistemas pelo SENAI Port„o. O cÛdigo È aberto e sem qualquer tipo de licenÁa por ser apenas para aprendizagem e por justificativa pessoal, caso se interesse no sistema e tenha qualquer tipo de d˙vida, pode entrar em contato comigo a qualquer momento que poderei esclarecer suas d˙vidas.
+A ideia do sistema √© para um TCC do curso t√©cnico em desenvolvimento de sistemas pelo SENAI Port√£o. O c√≥digo √© aberto e sem qualquer tipo de licen√ßa por ser apenas para aprendizagem e por justificativa pessoal, caso se interesse no sistema e tenha qualquer tipo de d√∫vida, pode entrar em contato comigo a qualquer momento que poderei esclarecer suas d√∫vidas.
 
