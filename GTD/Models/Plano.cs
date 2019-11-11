@@ -25,7 +25,7 @@ namespace GTD.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Display(Name = "Semana do Início")]
-        public DateTime? SemanaInicio { get; set; }
+        public DateTime? SemanaInicio { get; set; } = DateTime.Now;
 
         [Required]
         [Display(Name = "Selecionado")]
@@ -41,12 +41,10 @@ namespace GTD.Models
         //public int? SemanaID { get; set; } // não está ligado com semana
         //public Semana Semana { get; set; }
 
-        [Required]
         [Display(Name = "Treino")]
         public int? TreinoID { get; set; }
         public Treino Treino { get; set; }
 
-        [Required]
         [Display(Name = "Dieta")]
         public int? DietaID { get; set; }
         public Dieta Dieta { get; set; }

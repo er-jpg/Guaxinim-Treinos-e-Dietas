@@ -205,7 +205,8 @@ namespace GTD.Controllers
                     {
                         if (vm.SemanaID == null) vm.SemanaID = 1;
                         TempData["SemanaID"] = vm.SemanaID + 1;
-                        return View(Edit(vm.DietaID, null));
+                        vm.SemanaID++;
+                        return RedirectToAction("Edit", new { id = vm.DietaID, semana = vm.SemanaID });
                     }
 
                     else if (salvar.Equals("Salvar"))

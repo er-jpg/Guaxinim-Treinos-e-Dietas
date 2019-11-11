@@ -27,7 +27,7 @@ namespace GTD.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Display(Name = "Data do Treino")]
-        public DateTime DataTreino { get; set; }
+        public DateTime? DataTreino { get; set; } = DateTime.Now;
         public bool Completo { get; set; }
 
         // FK

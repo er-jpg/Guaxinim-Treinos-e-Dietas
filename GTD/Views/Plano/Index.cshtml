@@ -30,20 +30,21 @@
         <tbody class="table-hover">
             @foreach (var item in Model)
             {
-                <tr data-href="@Url.Action("Details", "Plano", new { id = item.PlanoID })">
-                    <td>
+                <tr>
+                    <td data-href="@Url.Action("Details", "Plano", new { id = item.PlanoID })">
                         @Html.DisplayFor(modelItem => item.PlanoNome)
                     </td>
-                    <td>
+                    <td data-href="@Url.Action("Details", "Plano", new { id = item.PlanoID })">
                         @Html.DisplayFor(modelItem => item.Duracao)
                     </td>
-                    <td>
+                    <td data-href="@Url.Action("Details", "Plano", new { id = item.PlanoID })">
                         @Html.DisplayFor(modelItem => item.Completo)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.PlanoID"><span class="icone editar"></span></a>
                         @*<a asp-action="Details" asp-route-id="@item.PlanoID">Details</a> |*@
-                        <a asp-action="Delete" asp-route-id="@item.PlanoID"><span class="icone deletar"></span></a>
+                        <a href="#deleteModal" rel="modal:open" id="abre-mol"
+                           data-route="/Dieta/Delete/@item.PlanoID" data-id=@item.PlanoID data-name="@item.PlanoNome"><span class="icone deletar"></span></a>
                     </td>
                 </tr>
             }

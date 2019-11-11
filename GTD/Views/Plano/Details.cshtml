@@ -4,33 +4,60 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="main">
+    <div class="indicador">
+        <h2>Criando novo treino</h2>
+    </div>
 
-<div>
-    <h4>Plano</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Duracao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duracao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Completo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Completo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-    </dl>
+    <div class="erro">
+        @Html.ValidationSummary()
+        @if (ViewBag.Erro != null)
+        {
+            <p>@ViewBag.Erro</p>
+
+        }
+    </div>
+
+    <form class="frm wide">
+        <div asp-validation-summary="ModelOnly" class="erro"></div>
+
+        <input asp-for="PlanoNome" class="form-control huge" placeholder="Nome do Plano" />
+        <span asp-validation-for="PlanoNome" class="text-danger"></span>
+
+        <label asp-for="SemanaInicio"></label>
+        <input asp-for="SemanaInicio" class="form-control huge" placeholder="Data de Início" disabled />
+        <span asp-validation-for="SemanaInicio" class="text-danger"></span>
+
+        <input asp-for="Duracao" class="form-control huge" placeholder="Duração em Semanas" disabled />
+        <span asp-validation-for="Duracao" class="text-danger"></span>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Selecionado" disabled /> Selecionar como plano principal
+        </label>
+
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
+        </label>
+
+        <div class="linha">
+            <label asp-for="TreinoID" class="control-label"></label>
+            <input value="@ViewBag.Treino" class="form-control" disabled />
+            <span asp-validation-for="TreinoID" class="text-danger"></span>
+        </div>
+        <div class="linha">
+            <label asp-for="DietaID" class="control-label"></label>
+            <input value="@ViewBag.Dieta" class="form-control" disabled />
+            <span asp-validation-for="DietaID" class="text-danger"></span>
+        </div>
+
+        <div class="linha">
+            <a asp-action="Edit" asp-route-id="@Model.PlanoID" class="bot bot-sec">Editar</a>
+            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        </div>
+    </form>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PlanoID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<a asp-action="Edit" asp-route-id="@Model.PlanoID">Edit</a> |
+<a asp-action="Index">Back to List</a>
+

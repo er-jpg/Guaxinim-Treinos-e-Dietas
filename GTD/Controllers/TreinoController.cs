@@ -46,7 +46,7 @@ namespace GTD.Controllers
             TreinoSemanaViewModel vm = new TreinoSemanaViewModel
             {
                 Completo = treino.Completo,
-                DataTreino = treino.DataTreino,
+                DataTreino = treino.DataTreino??DateTime.Now,
                 TreinoID = treino.TreinoID,
                 TreinoNome = treino.TreinoNome,
                 SemanaID = treinoSemana.SemanaID,
@@ -129,7 +129,7 @@ namespace GTD.Controllers
             TreinoSemanaViewModel vm = new TreinoSemanaViewModel
             {
                 TreinoID = treino.TreinoID,
-                DataTreino = treino.DataTreino,
+                DataTreino = treino.DataTreino??DateTime.Now,
                 Completo = treino.Completo,
                 TreinoNome = treino.TreinoNome
             };
@@ -202,7 +202,8 @@ namespace GTD.Controllers
                     {
                         if (vm.SemanaID == null) vm.SemanaID = 1;
                         TempData["SemanaID"] = vm.SemanaID + 1;
-                        return View(Edit(vm.TreinoID, null));
+                        vm.SemanaID++;
+                        return RedirectToAction("Edit", new { id = vm.TreinoID, semana = vm.SemanaID });
                     }
 
                     else if (salvar.Equals("Salvar"))

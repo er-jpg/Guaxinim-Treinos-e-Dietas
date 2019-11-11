@@ -54,6 +54,8 @@ namespace GTD.Controllers
                 return NotFound();
             }
 
+            ViewBag.Dieta = _context.Plano.Include(x => x.Dieta).FirstOrDefaultAsync(x => x.PlanoID == id);
+            ViewBag.Treino = _context.Plano.Include(x => x.Treino).FirstOrDefaultAsync(x => x.PlanoID == id);
             return View(plano);
         }
 
@@ -62,26 +64,16 @@ namespace GTD.Controllers
         {
             //ViewBag.Treinos = new SelectList(_context.Treino.ToList(), "TreinoID", "TreinoNome");
             //ViewBag.Dietas = new SelectList(_context.Dieta.ToList(), "DietaID", "DietaNome");
-            var plano = new PlanoViewModel
-            {
-                Treinos = from t in _context.Treino
-                          select new SelectListItem
-                          {
-                              Selected = t.TreinoID.ToString() == "Ativo",
-                              Text = t.TreinoNome,
-                              Value = t.TreinoNome
-                          },
+            var treinos = _context.Treino.OrderBy(i => i.TreinoID).ToList();
+            treinos.Insert(0, new Treino() { TreinoID = 0, TreinoNome = "Selecione o treino" });
 
-                Dietas = from d in _context.Dieta
-                         select new SelectListItem
-                         {
-                             Selected = d.DietaID.ToString() == "Ativo",
-                             Text = d.DietaNome,
-                             Value = d.DietaNome
-                         },
-            };
+            var dietas = _context.Dieta.OrderBy(i => i.DietaID).ToList();
+            dietas.Insert(0, new Dieta() { DietaID = 0, DietaNome = "Selecione a dieta" });
 
-            return View(plano);
+            ViewBag.Treinos = treinos;
+            ViewBag.Dietas = dietas;
+
+            return View();
         }
 
         // POST: Plano/Create
@@ -89,25 +81,12 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlanoID,TreinoID,DietaID,Selecionado,PlanoNome,Duracao,Completo")] PlanoViewModel param)
+        public async Task<IActionResult> Create([Bind("PlanoID,TreinoID,DietaID,SemanaInicio,Selecionado,PlanoNome,Duracao,Completo")] Plano param)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 param.UserID = user.Id;
-
-                Plano plano = new Plano
-                {
-                    ApplicationUser = param.ApplicationUser,
-                    UserID = param.UserID,
-                    Completo = param.Completo,
-                    DietaID = param.DietaID,
-                    TreinoID = param.TreinoID,
-                    Duracao = param.Duracao,
-                    PlanoNome = param.PlanoNome,
-                    Selecionado = param.Selecionado,
-                    SemanaInicio = param.SemanaInicio
-                };
 
                 _context.Add(param);
                 await _context.SaveChangesAsync();
@@ -129,6 +108,15 @@ namespace GTD.Controllers
             {
                 return NotFound();
             }
+
+            var treinos = _context.Treino.OrderBy(i => i.TreinoID).ToList();
+            treinos.Insert(0, new Treino() { TreinoID = 0, TreinoNome = "Selecione o treino" });
+
+            var dietas = _context.Dieta.OrderBy(i => i.DietaID).ToList();
+            dietas.Insert(0, new Dieta() { DietaID = 0, DietaNome = "Selecione a dieta" });
+
+            ViewBag.Treinos = treinos;
+            ViewBag.Dietas = dietas;
             return View(plano);
         }
 
@@ -137,9 +125,9 @@ namespace GTD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("PlanoID,PlanoNome,Duracao,Completo")] Plano plano)
+        public async Task<IActionResult> Edit(int? id, [Bind("PlanoID,TreinoID,DietaID,SemanaInicio,Selecionado,PlanoNome,Duracao,Completo")] Plano param)
         {
-            if (id != plano.PlanoID)
+            if (id != param.PlanoID)
             {
                 return NotFound();
             }
@@ -149,13 +137,13 @@ namespace GTD.Controllers
                 try
                 {
                     var user = await _userManager.GetUserAsync(HttpContext.User);
-                    plano.UserID = user.Id;
-                    _context.Update(plano);
+                    param.UserID = user.Id;
+                    _context.Update(param);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlanoExists(plano.PlanoID))
+                    if (!PlanoExists(param.PlanoID))
                     {
                         return NotFound();
                     }
@@ -166,25 +154,7 @@ namespace GTD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(plano);
-        }
-
-        // GET: Plano/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var plano = await _context.Plano
-                .FirstOrDefaultAsync(m => m.PlanoID == id);
-            if (plano == null)
-            {
-                return NotFound();
-            }
-
-            return View(plano);
+            return View(param);
         }
 
         // POST: Plano/Delete/5
