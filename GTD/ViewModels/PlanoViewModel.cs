@@ -28,7 +28,6 @@ namespace GTD.ViewModels
         [Display(Name = "Semana do Início")]
         public DateTime? SemanaInicio { get; set; }
 
-        [Required]
         [Display(Name = "Selecionado")]
         public bool Selecionado { get; set; }
 

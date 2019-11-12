@@ -15,14 +15,11 @@ namespace GTD.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? DataDiario { get; set; } = DateTime.Now;
 
-        [Required]
-        public bool CompletoTreino{ get; set; }
-
-        [Required]
-        public bool CompletoDieta { get; set; }
+        public bool CompletoTreino { get; set; } = false;
+        public bool CompletoDieta { get; set; } = false;
 
         // FK
-        public string PlanoID { get; set; }
+        public int? PlanoID { get; set; }
         public virtual Plano Plano { get; set; }
     }
 }
