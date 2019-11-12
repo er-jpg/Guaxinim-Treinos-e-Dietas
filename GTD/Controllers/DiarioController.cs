@@ -43,7 +43,9 @@ namespace GTD.Controllers
             var diario = await _context.Diario
                 .Include(p => p.Plano)
                 .Include(t => t.Plano.Treino)
+                .Include(ts => ts.Plano.Treino.TreinoSemana)
                 .Include(d => d.Plano.Dieta)
+                .Include(ds => ds.Plano.Dieta.DietaSemana)
                 .ToListAsync();
 
             if (planoCom.Count != 1)
@@ -60,7 +62,7 @@ namespace GTD.Controllers
                         .Include(p => p.Plano)
                         .ToListAsync();
                 }
-                return View(diario.ElementAt(0));
+                return View(diario.ElementAtOrDefault(0));
             }
             //return View(await _context.Diario.ToListAsync());
         }
@@ -86,16 +88,18 @@ namespace GTD.Controllers
         }
 
         [HttpPost]
-        public async void CompleteTreino(Diario diario)
+        public async void CompleteTreino(int id)
         {
+            var diario = _context.Diario.Where(x => x.DiarioID == id).FirstOrDefault();
             diario.CompletoTreino = true;
             _context.Update(diario);
             await _context.SaveChangesAsync();
         }
 
         [HttpPost]
-        public async void CompleteDieta(Diario diario)
+        public async void CompleteDieta(int id)
         {
+            var diario = _context.Diario.Where(x => x.DiarioID == id).FirstOrDefault();
             diario.CompletoDieta = true;
             _context.Update(diario);
             await _context.SaveChangesAsync();

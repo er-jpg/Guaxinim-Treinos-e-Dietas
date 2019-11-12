@@ -6,6 +6,7 @@
 
 <div class="main">
     <div class="indicador">
+        <input type="hidden" asp-for="DiarioID" id="diarioid"/>
         <h2>@Model.Plano.PlanoNome</h2>
         <a href="#" class="criar-novo">
             <span class="icone calendario"></span>
@@ -16,7 +17,7 @@
         <div class="indicador-item">
             <h2>Treino: @Model.Plano.Treino.TreinoNome</h2>
             <div id="tComp">
-                <input type="checkbox" onChange="mudaCor(tComp, this)" />
+                <input type="checkbox" onChange="mudaCor(tComp, this)" id="cbTreinoCompleto"/>
                 Completo
             </div>
             <p class="preto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, odio eu lobortis volutpat, mauris metus varius lectus, eu commodo ante felis vitae mauris. Maecenas non aliquam erat. Fusce convallis mollis lacus at posuere. Morbi nibh ex, euismod ut dolor sed, tristique vulputate odio. Fusce massa ex, pellentesque at sagittis et, viverra non neque. Fusce gravida, nibh vel pellentesque cursus, augue eros auctor nunc, quis imperdiet justo leo sit amet sapien. Nam imperdiet neque vel nibh maximus, non viverra eros dapibus. </p>
@@ -24,10 +25,11 @@
         <div class="indicador-item">
             <h2>Dieta: @Model.Plano.Dieta.DietaNome</h2>
             <div id="dComp">
-                <input type="checkbox" onChange="mudaCor(dComp, this)" />
+                <input type="checkbox" onChange="mudaCor(dComp, this)" id="cbDietaCompleto"/>
                 Completo
             </div>
             <p class="preto">Proin in enim ornare, dignissim turpis sed, dictum dolor. Suspendisse mattis tristique ultrices. Fusce faucibus finibus rutrum. Vivamus viverra eget ligula at ultricies. Sed et blandit lectus. Praesent hendrerit feugiat feugiat. Nunc ex tellus, efficitur a aliquet id, luctus non elit. Nunc enim tellus, iaculis sed nunc pellentesque, eleifend finibus lacus. Maecenas eu nibh finibus, vulputate tellus id, interdum ligula. In et magna in mauris tempor volutpat. Praesent ut dui metus. Nam id ullamcorper massa. Vivamus mattis nunc porttitor quam elementum pulvinar. Donec lectus urna, ornare lacinia nulla id, pulvinar lacinia tortor. </p>
         </div>
     </div>
 </div>
+
