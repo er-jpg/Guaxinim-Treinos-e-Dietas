@@ -20,8 +20,6 @@ namespace GTD.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public int? SemanaID { get; private set; }
-
         public DiarioController(GTDContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
