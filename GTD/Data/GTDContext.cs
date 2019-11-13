@@ -32,7 +32,7 @@ namespace GTD.Data
             // Dieta Semana
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DietaSemana>().
-                HasKey(ds => new { ds.DietaID, ds.SemanaID });
+                HasKey(ds => new { ds.DietaSemanaID });
 
             modelBuilder.Entity<DietaSemana>().
                 HasOne(d => d.Dieta).WithMany(ds => ds.DietaSemana).
@@ -45,7 +45,7 @@ namespace GTD.Data
             // Treino Semana
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TreinoSemana>().
-                HasKey(ts => new { ts.TreinoID, ts.SemanaID });
+                HasKey(ts => new { ts.TreinoSemanaID });
 
             modelBuilder.Entity<TreinoSemana>().
                 HasOne(t => t.Treino).WithMany(ts => ts.TreinoSemana).

@@ -20,6 +20,8 @@ namespace GTD.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+        public int? SemanaID { get; private set; }
+
         public DiarioController(GTDContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -30,7 +32,7 @@ namespace GTD.Controllers
         }
 
         // GET: Diario
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? semana)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
@@ -40,13 +42,18 @@ namespace GTD.Controllers
                 .Where(u => u.UserID == user.Id)
                 .ToListAsync();
 
+            if (semana == null)
+                semana = 1;
+
             var diario = await _context.Diario
                 .Include(p => p.Plano)
                 .Include(t => t.Plano.Treino)
                 .Include(ts => ts.Plano.Treino.TreinoSemana)
+                .ThenInclude(ts => ts.SemanaID)
                 .Include(d => d.Plano.Dieta)
                 .Include(ds => ds.Plano.Dieta.DietaSemana)
-                .ToListAsync();
+                .ThenInclude(ts => ts.SemanaID)
+                .ToListAsync();  
 
             if (planoCom.Count != 1)
             {
@@ -58,11 +65,17 @@ namespace GTD.Controllers
                 if (diario.Count == 0)
                 {
                     CreateDiario(user.Id, DateTime.Now);
-                    var diarioAfter = await _context.Diario
+                    diario = await _context.Diario
                         .Include(p => p.Plano)
+                        .Include(t => t.Plano.Treino)
+                        .Include(ts => ts.Plano.Treino.TreinoSemana)
+                        .ThenInclude(ts => ts.DescTreino)
+                        .Include(d => d.Plano.Dieta)
+                        .Include(ds => ds.Plano.Dieta.DietaSemana)
+                        .ThenInclude(ts => ts.DescDieta)
                         .ToListAsync();
                 }
-                return View(diario.ElementAtOrDefault(0));
+                return View(diario.ElementAt(0));
             }
             //return View(await _context.Diario.ToListAsync());
         }

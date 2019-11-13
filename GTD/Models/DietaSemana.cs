@@ -8,6 +8,9 @@ namespace GTD.Models
 {
     public class DietaSemana
     {
+        [Key]
+        public int? DietaSemanaID { get; set; }
+
         public int? DietaID { get; set; }
         public Dieta Dieta { get; set; }
         public int? SemanaID { get; set; }

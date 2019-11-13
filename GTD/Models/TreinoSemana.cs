@@ -8,6 +8,9 @@ namespace GTD.Models
 {
     public class TreinoSemana
     {
+        [Key]
+        public int? TreinoSemanaID { get; set; }
+
         public int? TreinoID { get; set; }
         public Treino Treino { get; set; }
         public int? SemanaID { get; set; }

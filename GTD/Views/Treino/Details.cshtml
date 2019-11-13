@@ -6,12 +6,12 @@
 
 <div class="main">
     <div class="indicador">
-        <h2>Dieta: @Html.DisplayFor(model => model.TreinoNome)</h2>
+        <h2>Treino: @Html.DisplayFor(model => model.TreinoNome)</h2>
     </div>
 
     <form class="frm wide">
         <div class="linha">
-            <label>Dieta para a semana</label>
+            <label>Treino para a semana</label>
             <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
             <input type="hidden" asp-for="SemanaID" />
         </div>
