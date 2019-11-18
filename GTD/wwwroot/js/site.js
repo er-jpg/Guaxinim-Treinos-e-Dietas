@@ -1,6 +1,16 @@
 ﻿// Aqui é onde vive a gambiarra, nem sei o que tá mais escrito aqui.
 // Write your JavaScript code.
 
+(function ($) {
+    $(function () {
+
+        $('.sidenav').sidenav();
+        $('.parallax').parallax();
+
+    }); // end of document ready
+})(jQuery); // end of jQuery name space
+
+
 jQuery(document).ready(function ($) {
     // pra fazer as tabela fica monstrona do pantano
     $('*[data-href]').on('click', function () {

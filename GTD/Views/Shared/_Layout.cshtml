@@ -12,68 +12,70 @@
     <title>@ViewData["Title"]</title>
 
     @* SVG https://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons *@
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat|Material+Icons" />
+    <link rel="stylesheet" href="~/css/materialize.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
-    <header>
-        <div class="title">
-            <a asp-controller="Home" asp-action="Index">
-                <img class="logo" src="~/img/logo real.png">
-            </a>
-        </div>
-        <div class="navigation">
-            <ul>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" asp-controller="Home" asp-action="Index" class="brand-logo"><img class="logo" src="~/img/logo real.png"></a>
+            <ul class="right hide-on-med-and-down">
                 <li><a asp-controller="Diario" asp-action="Index">Diário</a></li>
                 <li><a asp-controller="Plano" asp-action="Index">Planos</a></li>
                 <li><a asp-controller="Treino" asp-action="Index">Treinos</a></li>
                 <li><a asp-controller="Dieta" asp-action="Index">Dietas</a></li>
+                <li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
+                        <span class="email"> @UserManager.GetUserName(User)</span>
+                        <!--a -->
+                        <a class="btn" asp-controller="Infra" asp-action="Logout">
+                            <i class="material-icons">exit_to_app</i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn" asp-controller="Infra" asp-action="Login">
+                            Log in
+                        </a>
+                        <a class="btn" asp-controller="Infra" asp-action="Register">
+                            Registrar
+                        </a>
+                    }
+                </li>
             </ul>
-        </div>
-        <div class="login">
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
-                <span class="icone usuario"></span>
-                @UserManager.GetUserName(User)
-                <!--a -->
-                <a class="btn" asp-controller="Infra" asp-action="Logout">
-                    <span class="icone sair"></span>
-                    Logout
-                </a>
-            }
-            else
-            {
-                <a class="btn" asp-controller="Infra" asp-action="Login">
-                    <span class="icone entrar"></span>
-                    Log in
-                </a>
-                <a class="btn" asp-controller="Infra" asp-action="Register">
-                    <span class="icone sair"></span>
-                    Registrar
-                </a>
-            }
-        </div>
-    </header>
-    <div class="princ">
-        @RenderBody()
-    </div>
+            <ul id="nav-mobile" class="sidenav">
+                <li><a asp-controller="Diario" asp-action="Index">Diário</a></li>
+                <li><a asp-controller="Plano" asp-action="Index">Planos</a></li>
+                <li><a asp-controller="Treino" asp-action="Index">Treinos</a></li>
+                <li><a asp-controller="Dieta" asp-action="Index">Dietas</a></li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
+                    <span class="email"> @UserManager.GetUserName(User)</span>
+                    <a class="btn" asp-controller="Infra" asp-action="Logout">
+                        <i class="material-icons">exit_to_app</i>
 
-    @*<footer>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Cadastro</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="index.html#sobre">Sobre</a></li>
+                    </a>
+                }
+                else
+                {
+                    <a class="btn" asp-controller="Infra" asp-action="Login">
+                        Log in
+                    </a>
+                    <a class="btn" asp-controller="Infra" asp-action="Register">
+                        Registrar
+                    </a>
+                }
             </ul>
-            <ul>
-                <li><a href="#">Diário</a></li>
-                <li><a href="#">Planos</a></li>
-                <li><a href="#">Treinos</a></li>
-                <li><a href="#">Dietas</a></li>
-            </ul>
-        </footer>*@
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    @RenderBody()
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -87,6 +89,7 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/materialize.min.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="~/js/diario.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

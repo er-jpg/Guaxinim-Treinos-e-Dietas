@@ -1,44 +1,116 @@
 ﻿@{
     ViewData["Title"] = "Guaxinim Treinos e Dietas";
 }
-<div class="main">
-    <div class="banner">
-        <img src="img/slide.png">
-        <div class="texto">Guaxinim Treinos e Dietas</div>
-    </div>
-
-    <div class="container">
-        <img src="img/oat.png">
-        <div class="content">
-            <h2>Gerencie seus treinos e dietas de maneira simples</h2>
-            <p>Por que ter que gastar tempo escrevendo em papél toda semana o que fazer para o seu treino quando se pode guardar tudo em apenas um lugar?</p>
-            <p>Além de você poder guardar os seus treinos de exercícios físicos, aqui você também pode guardar suas dietas e mostrar ambos ao mesmo tempo em um formato de diário. Tudo feito para que você não precise ficar se preocupando com planilha de personal ou nutricionista, aqui você só vai ter que escrever o texto e o nós cuidamos de como apresentar à você.</p>
-            <p>Apenas cadastre-se no site e já pode começar a usar, aqui o usuário tem controle total sobre o que pode fazer, afinal de contas a pessoa que melhor conhece o seu corpo é você mesmo</p>
-            <p>Não mostramos para ninguém o que você come ou treina, apenas você vai poder checar isso. Não precisa se preocupar com rede social e ficar comparando-se aos outros.</p>
-            <h3 class="h-esc">Vantagens</h3>
-            <ul>
-                <li>Você é o dono do seu treino e dieta;</li>
-                <li>Diário onde você pode concluir ou não que fez;</li>
-                <li>Saber o que você fez em dietas e treinos passados;</li>
-                <li>Tudo de graça para você;</li>
-                <li>Código do sistema open-source (pra você que além de se importar com o corpo se importa com o que usa).</li>
-            </ul>
-            <h3>Projetos Futuros</h3>
-            <p>E se você acha que acabou por aí, ainda não, existem alguns projetos futuros para o site, alguns deles que são: ao final de cada plano, a possibilidade de colocar informações sobre o quão o seu desempenho aumentou, o que fazer para os planos futuros e poder compartilhar com quem você quiser os planos.</p>
+<div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <br><br>
+            <h1 class="header center teal-text text-lighten-2">Guaxinim Treinos e Dietas</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">Simplifique e adapte-se ao ambiente</h5>
+            </div>
+            <div class="row center">
+                <a asp-controller="Infra" asp-action="Register" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Cadastre-se</a>
+            </div>
+            <br><br>
         </div>
     </div>
+    <div class="parallax"><img src="~/img/cadastro.jpg"></div>
+</div>
 
-    <div class="banner">
-        <a asp-controller="Infra" asp-action="Register">
-            <img id="cadastro" src="img/cadastro.jpg">
-            <div id="cadastro-texto" class="texto">Cadastre-se</div>
-        </a>
-    </div>
-
-    <div class="container sobre">
-        <div class="content">
-            <h3><a name="sobre">Sobre</a></h3>
-            <p>Este site foi um trabalho de conclusão de curso, para qualquer informação extra do sistema, favor verificar o repositório do GitHub.</p>
+<div class="container">
+    <div class="section">
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="material-icons">mood</i></h2>
+                    <h5 class="center">Fácil de utilizar</h5>
+                    <p class="light">Fizemos tudo pensado para ser fácil e prático para você, cada ponto é para você gastar menos tempo no computador e mais no treino.</p>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="material-icons">outdoor_grill</i></h2>
+                    <h5 class="center">Controle sobre os seus dados</h5>
+                    <p class="light">Quer combinar opiniões médicas? Quer escrever o que leu na internet num forum? Aqui você pode, não precisa comprovar nada. Entre e guarde o que deseja. Você pode até colocar um churrasco na quarta-feira.</p>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="material-icons">sports</i></h2>
+                    <h5 class="center">Feito por quem usa</h5>
+                    <p class="light">O sistema passou de um projeto final para um projeto de verdade. Qualquer problema será resolvido como se a gente fosse usar antes de você.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">Leve o sistema para a sua academaia</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="~/img/barbell.jpg"></div>
+</div>
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 center">
+                <h3><i class="mdi-content-send brown-text"></i></h3>
+                <h4>Info</h4>
+                <p class="left-align light">Este sistema foi feito, em um primeiro momento, como um trabalho de conclusão de curso, desenvolvido com código aberto e aberto para qualquer um poder contribuir com alterações e ideias para o sistema. Agora ele é utilizado no dia-a-dia. O código está no <a href="https://github.com/er-jpg/Guaxinim-Treinos-e-Dietas">github</a>. E estamos abertos para implementar o sistema para a sua academia, onde até mesmo pensamos em criar os módulos de rede social.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="row center">
+                <h5 class="header col s12 light">O guaxinim nos representa.</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="~/img/slide2.jpg"></div>
+</div>
+
+<footer class="page-footer teal">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Bio</h5>
+                <p class="grey-text text-lighten-4">Sou apenas um desenvolvedor para um sistema que foi um trabalho de conclusão de curso de nível técnico. Qualquer contribuição de ideias ou código para o sistema será muito bem recebida.</p>
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Páginas</h5>
+                <ul>
+                    <li><a class="white-text" asp-controller="Diario" asp-action="Index">Diário</a></li>
+                    <li><a class="white-text" asp-controller="Plano" asp-action="Index">Planos</a></li>
+                    <li><a class="white-text" asp-controller="Treino" asp-action="Index">Treinos</a></li>
+                    <li><a class="white-text" asp-controller="Dieta" asp-action="Index">Dietas</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="https://github.com/er-jpg/Guaxinim-Treinos-e-Dietas">GitHub</a></li>
+                    <!--li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Tema feito por <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a> e sistema desenvolvido por Bruno S.
+        </div>
+    </div>
+</footer>
