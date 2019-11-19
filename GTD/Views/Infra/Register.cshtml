@@ -4,26 +4,70 @@
     ViewData["Title"] = "Register";
 }
 
-<section id="login">
-    <div class="left" id="bg-register"></div>
-    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="frm">
-        <h4 class="h4-a">GTD</h4>
-        <p>Cadastre-se agora para usar o sistema.</p>
-        <div asp-validation-summary="All" class="erro"></div>
-        <input asp-for="User" class="form-control" placeholder="Usuário" />
+<div class="section"></div>
+<main>
+    <center>
 
-        <input asp-for="Email" class="form-control" placeholder="Email" />
-        <p>A senha deve conter no mínimo 6 caracteres.</p>
-        <input asp-for="Password" class="form-control" placeholder="Senha" />
+        <h5 class="blue-grey-text">Registrando novo usuário</h5>
+        <div class="section"></div>
 
-        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirmar Senha" />
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-        <button type="submit" class="bot">
-            Registrar
-        </button>
-        <a class="small" asp-controller="Infra" asp-action="Login">Entrar</a>
-    </form>
-</section>
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="frm">
+                    <div class='row'>
+                        <div class='col s12'>
+                            <div asp-validation-summary="All" class="erro"></div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' id='user' asp-for="User" />
+                            <label for='User'>Usuário</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='email' id='email' asp-for="Email" />
+                            <label for='User'>Email</label>
+                            <span class="helper-text" data-error="wrong" data-success="right">Será o email que você fará login no sistema</span>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' id='password' asp-for="Password" />
+                            <label for='password'>Senha</label>
+                            <span class="helper-text">A senha deve ser maior que 6 caracteres</span>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' id='password' asp-for="ConfirmPassword" />
+                            <label for='password'>Confirmar Senha</label>
+                        </div>
+                    </div>
+
+
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Registrar</button>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+        <a asp-action="Login" asp-controller="Infra">Entrar</a>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

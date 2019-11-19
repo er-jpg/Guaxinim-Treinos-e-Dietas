@@ -4,35 +4,60 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="container">
-    <div class="row">
-        <form asp-action="Login" asp-controller="Infra">
-            <div class="row">
-                <div class="col s12 m6 offset-m3">
-                    <div class="card center-align mg">
+<div class="section"></div>
+<main>
+    <center>
 
-                        <div class="card-content">
-                            <span class="card-title">Login</span>
-                            <div class="input-field">
-                                <input id="email" type="email" class="validate">
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-field">
-                                <input id="password" type="password" class="validate">
-                                <label for="password">Password</label>
+        <h5 class="blue-grey-text">Por favor, entre com seus dados</h5>
+        <div class="section"></div>
 
-                            </div>
-                            <button class="btn pulse waves-effect waves-light" type="submit" name="action">
-                                Submit
-                                <i class="material-icons right">send</i>
-                            </button>
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form class="col s12" method="post" asp-action="Login" asp-controller="Infra">
+                    <div class='row'>
+                        <div class='col s12'>
                         </div>
                     </div>
-                </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='email' id='email' asp-for="Email" />
+                            <label for='email'>E-mail</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' id='password' asp-for="Senha" />
+                            <label for='password'>Senha</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p>
+                            <label>
+                                <input type="checkbox" asp-for="Lembrar" />
+                                <span>Lembrar de mim</span>
+                            </label>
+                        </p>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Login</button>
+                        </div>
+                    </center>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <a asp-action="Register" asp-controller="Infra">Criar conta</a>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

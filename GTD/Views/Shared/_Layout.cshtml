@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
-    <nav class="white" role="navigation">
+    <nav class="pink accent-1" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" asp-controller="Home" asp-action="Index" class="brand-logo"><img class="logo" src="~/img/logo real.png"></a>
             <ul class="right hide-on-med-and-down">
@@ -32,16 +32,16 @@
                         <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
                         <span class="email"> @UserManager.GetUserName(User)</span>
                         <!--a -->
-                        <a class="btn" asp-controller="Infra" asp-action="Logout">
+                        <a class="btn grey darken-3" asp-controller="Infra" asp-action="Logout">
                             <i class="material-icons">exit_to_app</i>
                         </a>
                     }
                     else
                     {
-                        <a class="btn" asp-controller="Infra" asp-action="Login">
+                        <a class="btn grey darken-3" asp-controller="Infra" asp-action="Login">
                             Log in
                         </a>
-                        <a class="btn" asp-controller="Infra" asp-action="Register">
+                        <a class="btn grey darken-3" asp-controller="Infra" asp-action="Register">
                             Registrar
                         </a>
                     }
@@ -56,22 +56,22 @@
                 {
                     <!-- a class="btn" asp-controller="Infra" asp-action="Logout" rel="modal:open"-->
                     <span class="email"> @UserManager.GetUserName(User)</span>
-                    <a class="btn" asp-controller="Infra" asp-action="Logout">
+                    <a class="btn grey darken-3" asp-controller="Infra" asp-action="Logout">
                         <i class="material-icons">exit_to_app</i>
 
                     </a>
                 }
                 else
                 {
-                    <a class="btn" asp-controller="Infra" asp-action="Login">
+                    <a class="btn grey darken-3" asp-controller="Infra" asp-action="Login">
                         Log in
                     </a>
-                    <a class="btn" asp-controller="Infra" asp-action="Register">
+                    <a class="btn grey darken-3" asp-controller="Infra" asp-action="Register">
                         Registrar
                     </a>
                 }
             </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 
