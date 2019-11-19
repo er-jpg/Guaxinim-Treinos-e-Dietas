@@ -18,16 +18,7 @@ jQuery(document).ready(function ($) {
     });
     // pra encher linguiça dos create com markdown eh aqui
     var textoSemana = "Domingo\n...\n\nSegunda-feira\n...\n\nTerça-feira\n...\n\nQuarta-feira\n...\n\nQuinta-feira\n...\n\nSexta-feira\n...\n\nSábado\n...";
-    $('#textareaMd.create').val(textoSemana);
-
-    // magia da text area pra ela ir crescendo de tamanho conforme vão escrevendo
-    $('#textareaMd').each(function () {
-        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
-
+    $('#textarea1.create').val(textoSemana);
 });
 
 // muda a cor do fundo do diário
@@ -36,13 +27,36 @@ function mudaCor(x, _this) {
 }
 
 // modal mágica pra deletar direto da lista
-$(document).on("click", "#abre-mol", function () {
-     var hiddenId = $(this).data('id'),
-         hiddenAction = $(this).data('route'),
-         hiddenName = $(this).data('name');
-     $("#hiddenid").val( hiddenId );
-     $("#hidden-name").val( hiddenName );
-    document.getElementById('formModal').action = hiddenAction;
+
+$(".delete-item").click(function () {
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você removerá permanentemente o item.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, remova',
+        cancelButtonText: 'Não'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: $(this).data("route"),
+                type: 'POST',
+                data: { "id": $(this).data("id") },
+                success: function () {
+                    Swal.fire(
+                        'Deletado!',
+                        'O item foi removido com sucesso.',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    })
 });
 
 // box shadow que funciona nos navegador

@@ -4,19 +4,85 @@
     ViewData["Title"] = "Editando Dieta";
 }
 
+<div class="section"></div>
+<main>
+    <center>
+        <h5 class="blue-grey-text">Editando dieta: @Model.DietaNome</h5>
+        <div class="section">
+            @Html.ValidationSummary()
+            @if (ViewBag.Erro != null)
+            {
+                <p>@ViewBag.Erro</p>
+
+            }
+        </div>
+
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form asp-action="Edit" class="frm wide">
+                    <input type="hidden" asp-for="DietaID" />
+                    <div class='row'>
+                        <div class='col s12'>
+                            <div asp-validation-summary="All" class="erro"></div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <label>Dieta para a semana</label>
+                            <input asp-for="SemanaID" class="form-control huge" value="@ViewBag.Semana" id="semana" disabled />
+                            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="DietaNome" />
+                            <label for='DietaNome'>Nome da Dieta</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="DataDieta" />
+                            <label for='DataDieta'>Data de início</label>
+                        </div>
+                    </div>
+
+                    <label>
+                        <input type="checkbox" asp-for="Completo" />
+                        <span>@Html.DisplayNameFor(model => model.Completo)</span>
+                    </label>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea" asp-for="Texto"></textarea>
+                            <label for="Texto">Descreva a sua dieta</label>
+                        </div>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Registrar</button>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
+
 <div class="main">
     <div class="indicador">
         <h2>Editando dieta: @Model.DietaNome</h2>
     </div>
 
-    <div class="erro">
-        @Html.ValidationSummary()
-        @if (ViewBag.Erro != null)
-        {
-            <p>@ViewBag.Erro</p>
 
-        }
-    </div>
 
     <form asp-action="Edit" class="frm wide">
         <div asp-validation-summary="ModelOnly" class="erro"></div>

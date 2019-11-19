@@ -231,14 +231,15 @@ namespace GTD.Controllers
         }
 
         // POST: Dieta/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int? id)
+        [ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var dieta = await _context.Dieta.FindAsync(id);
+            int intID = Convert.ToInt32(id);
+            var dieta = await _context.Dieta.FindAsync(intID);
             _context.Dieta.Remove(dieta);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(true);
         }
 
         private bool DietaExists(int? id)
