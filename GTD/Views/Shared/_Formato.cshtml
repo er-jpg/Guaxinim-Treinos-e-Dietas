@@ -1,7 +1,8 @@
-﻿<div>
-    <p>O campo de texto deverá seguir a formatação</p>
-    <form class="frm">
-        <textarea class="form-control create fit" disabled>
+﻿<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea" readonly>
 Domingo
 [Espaço para texto]
 [Podendo haver mais de uma linha para cada dia]
@@ -14,7 +15,10 @@ Segunda-feira
 
 
 [Se repetindo até chegar ao sábado]
-</textarea>
+                </textarea>
+                <label for="textarea1">Info</label>
+                <span class="helper-text">Onde os dias vão de Domingo à Sábado e mesmo que não exista nada para aquele dia é necessário adicionar o dia.</span>
+            </div>
+        </div>
     </form>
-    <p style="margin-bottom: 1em;">Onde os dias vão de Domingo à Sábado e mesmo que não exista nada para aquele dia é necessário adicionar o dia.</p>
 </div>

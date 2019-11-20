@@ -18,7 +18,8 @@ jQuery(document).ready(function ($) {
     });
     // pra encher linguiça dos create com markdown eh aqui
     var textoSemana = "Domingo\n...\n\nSegunda-feira\n...\n\nTerça-feira\n...\n\nQuarta-feira\n...\n\nQuinta-feira\n...\n\nSexta-feira\n...\n\nSábado\n...";
-    $('#textarea1.create').val(textoSemana);
+    $('#textareaMd').val(textoSemana);
+    $('#textareaMd').height("+=10");
 });
 
 // muda a cor do fundo do diário

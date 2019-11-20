@@ -57,15 +57,30 @@
 
                     <div class="row">
                         <div class="input-field col s12">
+                            <p>Escreva a sua dieta seguindo o formato abaixo</p>
                             <textarea id="textarea1" class="materialize-textarea" asp-for="Texto"></textarea>
                             <label for="Texto">Descreva a sua dieta</label>
+                            <span class="helper-text">
+                                <a class="waves-effect waves-light btn modal-trigger grey darken-3" href="#" onclick="$('#modal_help').modal('open');">
+                                    <i class="material-icons">mode_comment</i>
+                                </a>
+                                Ajuda com o formato.
+                            </span>
                         </div>
                     </div>
 
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect green'>Registrar</button>
+                            <div class="col s4">
+                                <input type="submit" value="Próxima Semana" class="btn btn-large grey" id="btnNext" name="salvar" />
+                            </div>
+                            <div class="col s4">
+                                <input type="submit" value="Salvar" class="btn btn-large green" id="btnSave" name="salvar" />
+                            </div>
+                            <div class="col s4">
+                                <button type="button" class="btn btn-large blue" onClick="javascript:history.go(-1)">Voltar</button>
+                            </div>
                         </div>
                     </center>
                 </form>
@@ -77,55 +92,10 @@
     <div class="section"></div>
 </main>
 
-<div class="main">
-    <div class="indicador">
-        <h2>Editando dieta: @Model.DietaNome</h2>
+<div id="modal_help" class="modal">
+    <div class="modal-content">
+        <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
     </div>
-
-
-
-    <form asp-action="Edit" class="frm wide">
-        <div asp-validation-summary="ModelOnly" class="erro"></div>
-        <input type="hidden" asp-for="DietaID" />
-        @*<input type="text" asp-for="DietaID"  disabled />*@
-
-
-        <div class="linha">
-            <label>Dieta para a semana</label>
-            <input asp-for="SemanaID" class="form-control huge" value="@ViewBag.Semana" id="semana" disabled />
-            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
-        </div>
-
-        <label asp-for="DietaNome"></label>
-        <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" />
-        <span asp-validation-for="DietaNome" class="text-danger"></span>
-
-        <label asp-for="DataDieta"></label>
-        <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" />
-        <span asp-validation-for="DataDieta" class="text-danger"></span>
-
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
-        </label>
-
-        <p>Escreva a sua dieta seguindo o formato abaixo</p>
-        <textarea asp-for="Texto" class="form-control huge" id="textareaMd"></textarea>
-        <span asp-validation-for="Texto" class="text-danger"></span>
-
-        <p><a href="#ajudaFormato" rel="modal:open"><span class="icone comentario"></span></a>Ajuda com o formato.</p>
-
-        <div class="linha">
-            @*<input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />*@
-            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />
-            <input type="submit" value="Salvar" class="bot" id="btnSave" name="salvar" />
-            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
-        </div>
-    </form>
-</div>
-
-<div id="ajudaFormato" class="modal">
-    <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
-    <a href="#" rel="modal:close" class="bot bot-alert">Fechar</a>
 </div>
 
 <script src="~/js/textValidator.js" asp-append-version="true"></script>

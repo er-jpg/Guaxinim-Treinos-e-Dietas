@@ -4,45 +4,98 @@
     ViewData["Title"] = "Informações";
 }
 
-<div class="main">
-    <div class="indicador">
-        <h2>Dieta: @Html.DisplayFor(model => model.DietaNome)</h2>
+<div class="section"></div>
+<main>
+    <center>
+        <h5 class="blue-grey-text">Editando dieta: @Model.DietaNome</h5>
+        <div class="section">
+            @Html.ValidationSummary()
+            @if (ViewBag.Erro != null)
+            {
+                <p>@ViewBag.Erro</p>
+
+            }
+        </div>
+
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form class="frm wide">
+                    @*<input type="hidden" asp-for="DietaID" />*@
+                    <div class='row'>
+                        <div class='col s12'>
+                            <div asp-validation-summary="All" class="erro"></div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <label>Dieta para a semana</label>
+                            <input asp-for="SemanaID" class="form-control huge" value="@ViewBag.Semana" id="semana" disabled />
+                            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="DietaNome" disabled />
+                            <label for='DietaNome'>Nome da Dieta</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="DataDieta" disabled />
+                            <label for='DataDieta'>Data de início</label>
+                        </div>
+                    </div>
+
+                    <label>
+                        <input type="checkbox" asp-for="Completo" disabled />
+                        <span>@Html.DisplayNameFor(model => model.Completo)</span>
+                    </label>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <p>Escreva a sua dieta seguindo o formato abaixo</p>
+                            <textarea id="textarea1" class="materialize-textarea" asp-for="Texto" disabled></textarea>
+                            <label for="Texto">Descreva a sua dieta</label>
+                            <span class="helper-text">
+                                <a class="waves-effect waves-light btn modal-trigger grey darken-3" href="#" onclick="$('#modal_help').modal('open');">
+                                    <i class="material-icons">mode_comment</i>
+                                </a>
+                                Ajuda com o formato.
+                            </span>
+                        </div>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <div class="col s4">
+                                <input type="submit" value="Próxima Semana" class="btn btn-large grey" id="btnNext" name="salvar" />
+                            </div>
+                            <div class="col s4">
+                                <input type="submit" value="Salvar" class="btn btn-large green" id="btnSave" name="salvar" disabled />
+                            </div>
+                            <div class="col s4">
+                                <button type="button" class="btn btn-large blue" onClick="javascript:history.go(-1)">Voltar</button>
+                            </div>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
+
+<div id="modal_help" class="modal">
+    <div class="modal-content">
+        <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
     </div>
-
-    <form class="frm wide">
-        <div class="linha">
-            <label>Dieta para a semana</label>
-            <input asp-for="SemanaID" class="form-control huge" id="semana" disabled />
-            <input type="hidden" asp-for="SemanaID" />
-        </div>
-
-        <label asp-for="DietaNome"></label>
-        <input asp-for="DietaNome" class="form-control huge" placeholder="Nome da Dieta" disabled />
-
-        @*<label asp-for="Duracao"></label>
-        <input asp-for="Duracao" class="form-control huge" placeholder="Duração" disabled />*@
-
-        <label asp-for="DataDieta"></label>
-        <input asp-for="DataDieta" class="form-control huge" placeholder="Data de Início" disabled />
-
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Completo" disabled /> @Html.DisplayNameFor(model => model.Completo)
-        </label>
-
-        <p>Escreva a sua dieta em markdown.</p>
-        <textarea asp-for="Texto" class="form-control huge" id="textareaMd" disabled></textarea>
-        <span asp-validation-for="Texto" class="text-danger"></span>
-
-        <p><span class="icone comentario"></span>Ajuda com markdown.</p>
-
-        @{ int? semanaPlus = Model.SemanaID + 1; }
-
-        <div class="linha">
-            <a asp-action="Details" asp-route-id="@Model.DietaID" asp-route-semana="@semanaPlus" value="Próxima Semana" class="bot bot-sec" id="btnNext">Próxima Semana</a>
-            <a asp-action="Edit" asp-route-id="@Model.DietaID" class="bot bot-sec">Editar</a>
-            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
-        </div>
-    </form>
 </div>
 
 <script src="~/js/textValidator.js" asp-append-version="true"></script>
