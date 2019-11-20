@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GTD.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DiarioController : Controller
     {
         private readonly GTDContext _context;
@@ -30,52 +30,52 @@ namespace GTD.Controllers
         }
 
         // GET: Diario
-        public async Task<IActionResult> Index(int? semana)
+        public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var planoCom = await _context.Plano
-                .Include(d => d.Diario)
-                .Where(s => s.Selecionado == true)
-                .Where(u => u.UserID == user.Id)
-                .ToListAsync();
+            //var planoCom = await _context.Plano
+            //    .Include(d => d.Diario)
+            //    .Where(s => s.Selecionado == true)
+            //    .Where(u => u.UserID == user.Id)
+            //    .ToListAsync();
 
-            if (semana == null)
-                semana = 1;
+            //if (semana == null)
+            //    semana = 1;
 
-            var diario = await _context.Diario
-                .Include(p => p.Plano)
-                .Include(t => t.Plano.Treino)
-                .Include(ts => ts.Plano.Treino.TreinoSemana)
-                .ThenInclude(ts => ts.SemanaID)
-                .Include(d => d.Plano.Dieta)
-                .Include(ds => ds.Plano.Dieta.DietaSemana)
-                .ThenInclude(ts => ts.SemanaID)
-                .ToListAsync();  
+            //var diario = await _context.Diario
+            //    .Include(p => p.Plano)
+            //    .Include(t => t.Plano.Treino)
+            //    .Include(ts => ts.Plano.Treino.TreinoSemana)
+            //    .ThenInclude(ts => ts.SemanaID)
+            //    .Include(d => d.Plano.Dieta)
+            //    .Include(ds => ds.Plano.Dieta.DietaSemana)
+            //    .ThenInclude(ts => ts.SemanaID)
+            //    .ToListAsync();  
 
-            if (planoCom.Count != 1)
-            {
-                ViewBag.Erro = "Favor selecionar um plano como atual.";
-                return View();
-            }
-            else
-            {
-                if (diario.Count == 0)
-                {
-                    CreateDiario(user.Id, DateTime.Now);
-                    diario = await _context.Diario
-                        .Include(p => p.Plano)
-                        .Include(t => t.Plano.Treino)
-                        .Include(ts => ts.Plano.Treino.TreinoSemana)
-                        .ThenInclude(ts => ts.DescTreino)
-                        .Include(d => d.Plano.Dieta)
-                        .Include(ds => ds.Plano.Dieta.DietaSemana)
-                        .ThenInclude(ts => ts.DescDieta)
-                        .ToListAsync();
-                }
-                return View(diario.ElementAt(0));
-            }
-            //return View(await _context.Diario.ToListAsync());
+            //if (planoCom.Count != 1)
+            //{
+            //    ViewBag.Erro = "Favor selecionar um plano como atual.";
+            //    return View();
+            //}
+            //else
+            //{
+            //    if (diario.Count == 0)
+            //    {
+            //        CreateDiario(user.Id, DateTime.Now);
+            //        diario = await _context.Diario
+            //            .Include(p => p.Plano)
+            //            .Include(t => t.Plano.Treino)
+            //            .Include(ts => ts.Plano.Treino.TreinoSemana)
+            //            .ThenInclude(ts => ts.DescTreino)
+            //            .Include(d => d.Plano.Dieta)
+            //            .Include(ds => ds.Plano.Dieta.DietaSemana)
+            //            .ThenInclude(ts => ts.DescDieta)
+            //            .ToListAsync();
+            //    }
+            //    return View(diario.ElementAt(0));
+            //}
+            return View();
         }
 
         // Cria o diário

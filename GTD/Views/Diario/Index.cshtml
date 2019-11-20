@@ -1,35 +1,58 @@
-﻿@model GTD.Models.Diario
+﻿@*@model GTD.Models.Diario*@
 
 @{
     ViewData["Title"] = "Diário";
 }
 
-<div class="main">
-    <div class="indicador">
-        <input type="hidden" asp-for="DiarioID" id="diarioid"/>
-        <h2>@Model.Plano.PlanoNome</h2>
-        <a href="#" class="criar-novo">
-            <span class="icone calendario"></span>
-        </a>
-    </div>
+<div class="section"></div>
+<div class="container">
+    <div class="row">
+            <div class="col s12 center-align">
+                <h5 class="blue-grey-text">NOME DO PLANO</h5>
+            </div>
+            <div class="col s12 center-align">21/12/2019 (Domingo)</div>
+            <div class="col s12 center-align"><p><i class="material-icons" style="vertical-align: -5px;">calendar_today</i>&nbsp;&nbsp;Restam 12 semanas</p></div>
 
-    <div class="indicador back-claro">
-        <div class="indicador-item">
-            <h2>Treino: @Model.Plano.Treino.TreinoNome</h2>
-            <div id="tComp">
-                <input type="checkbox" onChange="mudaCor(tComp, this)" id="cbTreinoCompleto"/>
-                Completo
+        <div class="col s12 m6 blue-grey lighten-5">
+            <div class="card blue-grey lighten-5 z-depth-0" style="min-height: 60vh;">
+                <div class="card-content">
+                    <span class="card-title center-align">NONE DO TREINO</span>
+                    <form action="#">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Completo</span>
+                            </label>
+                        </p>
+                    </form>
+                    <ul>
+                        <li>15 minutos pulando corda</li>
+                        <li>2 horas de piscina</li>
+                        <li>5km corrida leve</li>
+                    </ul>
+                </div>
             </div>
-            <p class="preto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, odio eu lobortis volutpat, mauris metus varius lectus, eu commodo ante felis vitae mauris. Maecenas non aliquam erat. Fusce convallis mollis lacus at posuere. Morbi nibh ex, euismod ut dolor sed, tristique vulputate odio. Fusce massa ex, pellentesque at sagittis et, viverra non neque. Fusce gravida, nibh vel pellentesque cursus, augue eros auctor nunc, quis imperdiet justo leo sit amet sapien. Nam imperdiet neque vel nibh maximus, non viverra eros dapibus. </p>
         </div>
-        <div class="indicador-item">
-            <h2>Dieta: @Model.Plano.Dieta.DietaNome</h2>
-            <div id="dComp">
-                <input type="checkbox" onChange="mudaCor(dComp, this)" id="cbDietaCompleto"/>
-                Completo
+        <div class="col col s12 m6 blue-grey lighten-5">
+            <div class="card blue-grey lighten-5 z-depth-0" style="min-height: 60vh;">
+                <div class="card-content">
+                    <span class="card-title center-align">NOME DA DIETA</span>
+                    <form action="#">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>Completo</span>
+                            </label>
+                        </p>
+                    </form>
+                    <ul>
+                        <li>Cura ressaca: acorda bebendo mais</li>
+                        <li>Almoço: churrasco com mt carne mal passada e pão de alho</li>
+                        <li>Lanche da tarde: carne da churrasqueira</li>
+                        <li>Janta: esqueceu porque tava bebendo</li>
+                    </ul>
+                </div>
             </div>
-            <p class="preto">Proin in enim ornare, dignissim turpis sed, dictum dolor. Suspendisse mattis tristique ultrices. Fusce faucibus finibus rutrum. Vivamus viverra eget ligula at ultricies. Sed et blandit lectus. Praesent hendrerit feugiat feugiat. Nunc ex tellus, efficitur a aliquet id, luctus non elit. Nunc enim tellus, iaculis sed nunc pellentesque, eleifend finibus lacus. Maecenas eu nibh finibus, vulputate tellus id, interdum ligula. In et magna in mauris tempor volutpat. Praesent ut dui metus. Nam id ullamcorper massa. Vivamus mattis nunc porttitor quam elementum pulvinar. Donec lectus urna, ornare lacinia nulla id, pulvinar lacinia tortor. </p>
         </div>
     </div>
 </div>
-
