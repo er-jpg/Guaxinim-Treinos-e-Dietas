@@ -4,62 +4,92 @@
     ViewData["Title"] = "Criando novo plano";
 }
 
-<div class="main">
-    <div class="indicador">
-        <h2>Criando novo plano</h2>
-    </div>
+<div class="section"></div>
+<main>
+    <center>
+        <h5 class="blue-grey-text">Criando novo plano</h5>
+        <div class="section">
+            @Html.ValidationSummary()
+            @if (ViewBag.Erro != null)
+            {
+                <p>@ViewBag.Erro</p>
 
-    <div class="erro">
-        @Html.ValidationSummary()
-        @if (ViewBag.Erro != null)
-        {
-            <p>@ViewBag.Erro</p>
-
-        }
-    </div>
-
-    <form asp-action="Create" class="frm wide">
-        <div asp-validation-summary="ModelOnly" class="erro"></div>
-
-        <input asp-for="PlanoNome" class="form-control huge" placeholder="Nome do Plano" />
-        <span asp-validation-for="PlanoNome" class="text-danger"></span>
-
-        <label asp-for="SemanaInicio"></label>
-        <input asp-for="SemanaInicio" class="form-control huge" placeholder="Data de Início" />
-        <span asp-validation-for="SemanaInicio" class="text-danger"></span>
-
-        <input asp-for="Duracao" class="form-control huge" placeholder="Duração em Semanas" />
-        <span asp-validation-for="Duracao" class="text-danger"></span>
-
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Selecionado" /> Selecionar como plano principal
-        </label>
-
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
-        </label>
-
-        <div class="linha">
-            <label asp-for="TreinoID" class="control-label"></label>
-            <select asp-for="TreinoID" class="form-control" asp-items="@(new SelectList(ViewBag.Treinos, "TreinoID", "TreinoNome"))"></select>
-            <span asp-validation-for="TreinoID" class="text-danger"></span>
-        </div>
-        <div class="linha">
-            <label asp-for="DietaID" class="control-label"></label>
-            <select asp-for="DietaID" class="form-control" asp-items="@(new SelectList(ViewBag.Dietas, "DietaID", "DietaNome"))"></select>
-            <span asp-validation-for="TreinoID" class="text-danger"></span>
+            }
         </div>
 
-        <div class="linha">
-            <input type="submit" value="Salvar" class="bot" id="btnSave" name="salvar" />
-            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form asp-action="Create" class="frm wide">
+                    @*<input type="hidden" asp-for="PlanoID" />*@
+                    <div class='row'>
+                        <div class='col s12'>
+                            <div asp-validation-summary="All" class="erro"></div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="PlanoNome" />
+                            <label for='PlanoNome'>Nome do Plano</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='date' asp-for="SemanaInicio" />
+                            <label for='SemanaInicio'>Semana de início</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='col s12 m6'>
+                            <label>
+                                <input type="checkbox" asp-for="Completo" />
+                                <span>@Html.DisplayNameFor(model => model.Completo)</span>
+                            </label>
+                        </div>
+
+                        <div class='col s12 m6'>
+                            <label>
+                                <input type="checkbox" asp-for="Selecionado" />
+                                <span>@Html.DisplayNameFor(model => model.Selecionado)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='col s12 m6'>
+                            <label asp-for="TreinoID"></label>
+                            <select asp-for="TreinoID" asp-items="@(new SelectList(ViewBag.Treinos, "TreinoID", "TreinoNome"))"></select>
+                        </div>
+
+                        <div class='col s12 m6'>
+                            <label asp-for="DietaID"></label>
+                            <select asp-for="DietaID" asp-items="@(new SelectList(ViewBag.Dietas, "DietaID", "DietaNome"))"></select>
+                        </div>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <div class="col s6">
+                                <input type="submit" value="Salvar" class="btn btn-large green" id="btnSave" name="salvar" />
+                            </div>
+                            <div class="col s6">
+                                <button type="button" class="btn btn-large blue" onClick="javascript:history.go(-1)">Voltar</button>
+                            </div>
+                        </div>
+                    </center>
+                </form>
+            </div>
         </div>
-    </form>
+    </center>
 
-</div>
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
 
-<script src="~/js/textValidator.js" asp-append-version="true"></script>
-
-@*@section Scripts {
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+}
