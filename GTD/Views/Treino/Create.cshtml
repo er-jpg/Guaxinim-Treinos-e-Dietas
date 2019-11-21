@@ -4,58 +4,101 @@
     ViewData["Title"] = "Criar Novo Treino";
 }
 
-<div class="main">
-    <div class="indicador">
-        <h2>Criando novo treino</h2>
+<div id="modal_help" class="modal">
+    <div class="modal-content">
+        <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
     </div>
-
-    <div class="erro">
-        @Html.ValidationSummary()
-        @if (ViewBag.Erro != null)
-        {
-            <p>@ViewBag.Erro</p>
-
-        }
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
     </div>
-
-    <form asp-action="Create" class="frm wide">
-        <div asp-validation-summary="ModelOnly" class="erro"></div>
-
-        <div class="linha">
-            <label>Treino para a semana</label>
-            <input asp-for="SemanaID" class="form-control huge" id="semana" value="@ViewBag.Semana" disabled />
-            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
-        </div>
-
-        <input asp-for="TreinoNome" class="form-control huge" placeholder="Nome do Treino" />
-        <span asp-validation-for="TreinoNome" class="text-danger"></span>
-
-        <label asp-for="DataTreino"></label>
-        <input asp-for="DataTreino" class="form-control huge" placeholder="Data de Início" />
-        <span asp-validation-for="DataTreino" class="text-danger"></span>
-
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Completo" /> @Html.DisplayNameFor(model => model.Completo)
-        </label>
-
-        <p>Escreva o seu treino seguindo o formato abaixo</p>
-        <textarea asp-for="Texto" class="form-control huge create" id="textareaMd"></textarea>
-        <span asp-validation-for="Texto" class="text-danger"></span>
-
-        <p><a href="#ajudaFormato" rel="modal:open"><span class="icone comentario"></span></a>Ajuda com o formato.</p>
-
-        <div class="linha">
-            <input type="submit" value="Próxima Semana" class="bot bot-sec" id="btnNext" name="salvar" />
-            <input type="submit" value="Salvar" class="bot" id="btnSave" name="salvar" />
-            <button type="button" class="bot bot-back" onClick="javascript:history.go(-1)">Voltar</button>
-        </div>
-    </form>
 </div>
 
-<div id="ajudaFormato" class="modal">
-    <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
-    <a href="#" rel="modal:close" class="bot bot-alert">Fechar</a>
-</div>
+<div class="section"></div>
+<main>
+    <center>
+        <h5 class="blue-grey-text">Criando novo treino</h5>
+        <div class="section">
+            @Html.ValidationSummary()
+            @if (ViewBag.Erro != null)
+            {
+                <p>@ViewBag.Erro</p>
+
+            }
+        </div>
+
+        <div class="container">
+            <div class="blue-grey lighten-5 row" style="padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form asp-action="Create" class="frm wide">
+                    @*<input type="hidden" asp-for="DietaID" />*@
+                    <div class='row'>
+                        <div class='col s12'>
+                            <div asp-validation-summary="All" class="erro"></div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <label>Treino para a semana</label>
+                            <input asp-for="SemanaID" class="form-control huge" value="@ViewBag.Semana" id="semana" disabled />
+                            <input type="hidden" asp-for="SemanaID" value="@ViewBag.Semana" />
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' asp-for="TreinoNome" />
+                            <label for='TreinoNome'>Nome do Treino</label>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='date' asp-for="DataTreino" />
+                            <label for='DataTreino'>Data de início</label>
+                        </div>
+                    </div>
+
+                    <label>
+                        <input type="checkbox" asp-for="Completo" />
+                        <span>@Html.DisplayNameFor(model => model.Completo)</span>
+                    </label>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textareaMd" class="materialize-textarea" asp-for="Texto"></textarea>
+                            <label for="Texto">Escreva o seu treino seguindo o formato abaixo</label>
+                            <span class="helper-text">
+                                <a class="waves-effect waves-light btn modal-trigger grey darken-3" href="#modal_help">
+                                    <i class="material-icons">mode_comment</i>
+                                </a>
+                                Ajuda com o formato.
+                            </span>
+                        </div>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <div class="col s4">
+                                <input type="submit" value="Próxima Semana" class="btn btn-large grey" id="btnNext" name="salvar" />
+                            </div>
+                            <div class="col s4">
+                                <input type="submit" value="Salvar" class="btn btn-large green" id="btnSave" name="salvar" />
+                            </div>
+                            <div class="col s4">
+                                <button type="button" class="btn btn-large blue" onClick="javascript:history.go(-1)">Voltar</button>
+                            </div>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
 
 <script src="~/js/textValidator.js" asp-append-version="true"></script>
 

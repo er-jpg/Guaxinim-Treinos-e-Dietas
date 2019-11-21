@@ -65,9 +65,8 @@
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <p>Escreva a sua dieta seguindo o formato abaixo</p>
                             <textarea id="textareaMd" class="materialize-textarea" asp-for="Texto"></textarea>
-                            <label for="Texto">Descreva a sua dieta</label>
+                            <label for="Texto">Escreva a sua dieta seguindo o formato abaixo</label>
                             <span class="helper-text">
                                 <a class="waves-effect waves-light btn modal-trigger grey darken-3" href="#modal_help">
                                     <i class="material-icons">mode_comment</i>
@@ -99,15 +98,6 @@
     <div class="section"></div>
     <div class="section"></div>
 </main>
-
-<div id="modal_help" class="modal">
-    <div class="modal-content">
-        <partial name="~/Views/Shared/_Formato.cshtml" class="mb" />
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
-    </div>
-</div>
 
 <script src="~/js/textValidator.js" asp-append-version="true"></script>
 

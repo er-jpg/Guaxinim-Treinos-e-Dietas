@@ -33,13 +33,13 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td data-href="@Url.Action("Details", "Dieta", new { id = item.TreinoID })">
+                            <td data-href="@Url.Action("Details", "Treino", new { id = item.TreinoID })">
                                 @Html.DisplayFor(modelItem => item.TreinoNome)
                             </td>
-                            <td data-href="@Url.Action("Details", "Dieta", new { id = item.TreinoID })">
+                            <td data-href="@Url.Action("Details", "Treino", new { id = item.TreinoID })">
                                 @Html.DisplayFor(modelItem => item.TreinoNome)
                             </td>
-                            <td data-href="@Url.Action("Details", "Dieta", new { id = item.TreinoID })">
+                            <td data-href="@Url.Action("Details", "Treino", new { id = item.TreinoID })">
                                 <label>
                                     <input type="checkbox" name="Completo" id="Completo" value="true" class="filled-in" @(item.Completo ? "checked" : "") disabled />
                                     <span></span>
